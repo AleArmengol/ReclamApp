@@ -22,7 +22,9 @@ public class Controlador {
 
 	private static Controlador instancia;
 	
-	private Controlador() { }
+	private Controlador() {
+		//Comentario de prueba
+	}
 	
 	public static Controlador getInstancia() {
 		if(instancia == null)
