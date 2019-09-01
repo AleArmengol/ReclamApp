@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/aearm/Dropbox/UADE/Tercer año/Segundo Cuatrimestre/Aplicaciones Interactivas/lib/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aearm/Dropbox/UADE/Tercer año/Segundo Cuatrimestre/Aplicaciones Interactivas/lib/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aearm/Dropbox/UADE/Tercer año/Segundo Cuatrimestre/Aplicaciones Interactivas/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aearm/Dropbox/UADE/Tercer año/Segundo Cuatrimestre/Aplicaciones Interactivas/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aearm/Dropbox/UADE/Tercer año/Segundo Cuatrimestre/Aplicaciones Interactivas/lib/ejb3-persistence.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aearm/Dropbox/UADE/Tercer año/Segundo Cuatrimestre/Aplicaciones Interactivas/lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aearm/Dropbox/UADE/Tercer año/Segundo Cuatrimestre/Aplicaciones Interactivas/lib/hibernate-annotations.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aearm/Dropbox/UADE/Tercer año/Segundo Cuatrimestre/Aplicaciones Interactivas/lib/hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aearm/Dropbox/UADE/Tercer año/Segundo Cuatrimestre/Aplicaciones Interactivas/lib/javassist-3.4.GA.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aearm/Dropbox/UADE/Tercer año/Segundo Cuatrimestre/Aplicaciones Interactivas/lib/jta-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aearm/Dropbox/UADE/Tercer año/Segundo Cuatrimestre/Aplicaciones Interactivas/lib/jtds-1.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aearm/Dropbox/UADE/Tercer año/Segundo Cuatrimestre/Aplicaciones Interactivas/lib/slf4j-api-1.5.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aearm/Dropbox/UADE/Tercer año/Segundo Cuatrimestre/Aplicaciones Interactivas/lib/slf4j-simple-1.5.6.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
