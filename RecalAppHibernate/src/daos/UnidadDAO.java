@@ -1,0 +1,37 @@
+package daos;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.classic.Session;
+
+import hibernate.HibernateUtil;
+import modelo.Unidad;
+
+public class UnidadDAO {
+	
+	private static UnidadDAO instance;
+	private UnidadDAO() {
+		
+	}
+	
+	public static UnidadDAO getInstance() {
+		if(instance == null)
+			instance = new UnidadDAO();
+		return instance;
+	}
+	
+
+//	private Unidad toNegocio(UnidadEntity entity) {
+//		// FALTAN ATRIBUTOS DE LA ENTITY UNIDAD
+//	}
+
+	public List<Unidad> getUnidades(int codigo) {
+		//TODO
+		List<Unidad> unidadesN = new ArrayList<Unidad>();
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		return null;
+		
+	}
+}

@@ -3,6 +3,8 @@ package hibernate;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
+import entities.EdificioEntity;
+
 public class HibernateUtil {
 
 	private static final SessionFactory sessionFactory;
@@ -11,6 +13,7 @@ public class HibernateUtil {
 	{
 		try {
 			AnnotationConfiguration config = new AnnotationConfiguration();
+			config.addAnnotatedClass(EdificioEntity.class);
 			sessionFactory = config.buildSessionFactory();
 		}
 		catch (Throwable ex) {

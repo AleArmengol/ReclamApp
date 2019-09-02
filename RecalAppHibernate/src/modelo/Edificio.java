@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import daos.UnidadDAO;
 import views.EdificioView;
 
 public class Edificio {
@@ -51,7 +52,11 @@ public class Edificio {
 	}
 
 	public List<Unidad> getUnidades() {
-		return unidades;
+		//TODO
+		if(unidades == null) {
+			unidades = UnidadDAO.getInstance().getUnidades(this.codigo);
+		}
+		return null;
 	}
 
 	public Set<Persona> duenios() {
