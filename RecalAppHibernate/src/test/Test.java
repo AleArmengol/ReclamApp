@@ -3,6 +3,9 @@ package test;
 import java.util.List;
 
 import controlador.Controlador;
+import daos.UnidadDAO;
+import exceptions.EdificioException;
+import exceptions.UnidadException;
 import views.EdificioView;
 import views.UnidadView;
 
@@ -16,12 +19,19 @@ public class Test {
 			System.out.println(e.getNombre());
 			
 		}
-//		List<UnidadView> unidades = Controlador.getInstancia().getUnidadesPorEdificio(codigo);
-//		for(UnidadView u : unidades) {
-//			System.out.println(u.getPiso());
-//		}
 		
+		try {
+			List<UnidadView> unidades = null;
+			unidades = Controlador.getInstancia().getUnidadesPorEdificio(2);
+			for(UnidadView u : unidades) {
+				System.out.println(u.getId());
+			}
+		} catch (EdificioException e) {
+			System.out.println(e.getMessage());
 		}
-
+		
 	}
+
+	
+}
 

@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.hibernate.classic.Session;
 
+import entities.UnidadEntity;
 import hibernate.HibernateUtil;
+import modelo.Edificio;
 import modelo.Unidad;
 
 public class UnidadDAO {
@@ -27,11 +29,23 @@ public class UnidadDAO {
 //	}
 
 	public List<Unidad> getUnidades(int codigo) {
-		//TODO
 		List<Unidad> unidadesN = new ArrayList<Unidad>();
+		List<UnidadEntity> unidadesE = null;
 		Session s = HibernateUtil.getSessionFactory().openSession();
 		s.beginTransaction();
-		return null;
+		unidadesE = s.createQuery("FROM UnidadEntity ue WHERE ue.edificioE.codigo = ?").setInteger(0, codigo).list();
+		s.getTransaction().commit();
+		s.close();
+		for(UnidadEntity eu: unidadesE) {
+			unidadesN.add(toNegocio(eu));
+		}
 		
+		return unidadesN;
+		
+	}
+
+ Unidad toNegocio(UnidadEntity eu) {
+	Edificio aux = EdificioDAO.getInstance().toNegocio(eu.getEdificioE()); //Para construir un objeto Unidad 
+	return new Unidad(eu.getId(), eu.getPiso(), eu.getNumero(), aux);     //necesitamos un Objecto de Negocio Edificio
 	}
 }

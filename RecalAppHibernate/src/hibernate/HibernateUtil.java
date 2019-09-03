@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
 import entities.EdificioEntity;
+import entities.UnidadEntity;
 
 public class HibernateUtil {
 
@@ -14,6 +15,7 @@ public class HibernateUtil {
 		try {
 			AnnotationConfiguration config = new AnnotationConfiguration();
 			config.addAnnotatedClass(EdificioEntity.class);
+			config.addAnnotatedClass(UnidadEntity.class);
 			sessionFactory = config.buildSessionFactory();
 		}
 		catch (Throwable ex) {

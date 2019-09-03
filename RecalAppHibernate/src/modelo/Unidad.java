@@ -58,7 +58,7 @@ public class Unidad {
 		this.inquilinos = new ArrayList<Persona>();
 		this.habitado = false;
 	}
-	
+	//si la lista de inquilinos esta vacia y la unidad esta habitada, quiere decir que el duenio la esta ocupando
 	public void habitar() throws UnidadException {
 		if(this.habitado)
 			throw new UnidadException("La unidad ya esta habitada");

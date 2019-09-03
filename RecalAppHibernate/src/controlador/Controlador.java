@@ -127,7 +127,7 @@ public class Controlador {
 	
 	public void habitarUnidad(int codigo, String piso, String numero) throws UnidadException {
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
-		unidad.habitar();;
+		unidad.habitar();
 	}
 	
 	public void agregarPersona(String documento, String nombre) {

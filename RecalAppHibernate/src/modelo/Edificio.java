@@ -52,11 +52,10 @@ public class Edificio {
 	}
 
 	public List<Unidad> getUnidades() {
-		//TODO
-		if(unidades == null) {
+		if(unidades.size() == 0) { //DUDOSO PREGUNTAR unidades == null??
 			unidades = UnidadDAO.getInstance().getUnidades(this.codigo);
 		}
-		return null;
+		return unidades;
 	}
 
 	public Set<Persona> duenios() {
