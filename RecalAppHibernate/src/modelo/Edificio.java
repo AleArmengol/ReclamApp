@@ -28,15 +28,23 @@ public class Edificio {
 	
 	public Set<Persona> habilitados(){
 		Set<Persona> habilitados = new HashSet<Persona>();
+		this.unidades = this.getUnidades(); //CONSULTAR TODO
 		for(Unidad unidad : unidades) {
 			List<Persona> duenios = unidad.getDuenios();
 			for(Persona p : duenios)
 				habilitados.add(p);
-			List<Persona> inquilinos = unidad.getInquilinos();
-			for(Persona p : inquilinos)
-				habilitados.add(p);
+//			List<Persona> inquilinos = unidad.getInquilinos(); //TODO
+//			for(Persona p : inquilinos)
+//				habilitados.add(p);
 		}
 		return habilitados;
+	}
+	
+	public List<Unidad> getUnidades() {
+		if(unidades.size() == 0) { //DUDOSO PREGUNTAR unidades == null??
+			unidades = UnidadDAO.getInstance().getUnidades(this.codigo);
+		}
+		return unidades;
 	}
 
 	public int getCodigo() {
@@ -51,12 +59,6 @@ public class Edificio {
 		return direccion;
 	}
 
-	public List<Unidad> getUnidades() {
-		if(unidades.size() == 0) { //DUDOSO PREGUNTAR unidades == null??
-			unidades = UnidadDAO.getInstance().getUnidades(this.codigo);
-		}
-		return unidades;
-	}
 
 	public Set<Persona> duenios() {
 		Set<Persona> resultado = new HashSet<Persona>();

@@ -7,6 +7,7 @@ import daos.UnidadDAO;
 import exceptions.EdificioException;
 import exceptions.UnidadException;
 import views.EdificioView;
+import views.PersonaView;
 import views.UnidadView;
 
 public class Test {
@@ -20,15 +21,26 @@ public class Test {
 			
 		}
 		
+//		try {
+//			List<UnidadView> unidades = null;
+//			unidades = Controlador.getInstancia().getUnidadesPorEdificio(2);
+//			for(UnidadView u : unidades) {
+//				System.out.println(u.getId());
+//			}
+//		} catch (EdificioException e) {
+//			System.out.println(e.getMessage());
+//		}
+		
 		try {
-			List<UnidadView> unidades = null;
-			unidades = Controlador.getInstancia().getUnidadesPorEdificio(2);
-			for(UnidadView u : unidades) {
-				System.out.println(u.getId());
+			List<PersonaView> personas = null;
+			personas = Controlador.getInstancia().habilitadosPorEdificio(1);
+			for(PersonaView p : personas) {
+				System.out.println(p.getNombre());
 			}
 		} catch (EdificioException e) {
 			System.out.println(e.getMessage());
 		}
+		
 		
 	}
 

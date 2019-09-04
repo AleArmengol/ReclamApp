@@ -45,7 +45,7 @@ public class Controlador {
 	public List<UnidadView> getUnidadesPorEdificio(int codigo) throws EdificioException{
 		List<UnidadView> resultado = new ArrayList<UnidadView>();
 		Edificio edificio = buscarEdificio(codigo);
-		List<Unidad> unidades = edificio.getUnidades();
+		List<Unidad> unidades = edificio.getUnidades(); //revisar metodo getUnidades
 		for(Unidad unidad : unidades)
 			resultado.add(unidad.toView());
 		return resultado;

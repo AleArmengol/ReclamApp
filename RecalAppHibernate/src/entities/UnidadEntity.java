@@ -20,8 +20,9 @@ public class UnidadEntity {
 	@Column(name="identificador")
 	private int id;
 	
-//	@OneToMany
-//	private List<DuenioEntity> dueniosE;
+	@OneToMany
+	@JoinColumn(name="identificador")
+	private List<DuenioEntity> dueniosE;
 //	@OneToMany
 //	private List<InquilinoEntity> inquilinosE;
 	private String piso;

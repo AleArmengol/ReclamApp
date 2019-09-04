@@ -3,6 +3,7 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import daos.DueniosDAO;
 import exceptions.UnidadException;
 import views.EdificioView;
 import views.UnidadView;
@@ -84,7 +85,7 @@ public class Unidad {
 	}
 
 	public List<Persona> getDuenios() {
-		return duenios;
+		return DueniosDAO.getInstance().getDueniosByUnidad(this.id);
 	}
 
 	public List<Persona> getInquilinos() {
