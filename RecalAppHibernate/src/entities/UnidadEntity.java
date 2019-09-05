@@ -20,11 +20,11 @@ public class UnidadEntity {
 	@Column(name="identificador")
 	private int id;
 	
-	@OneToMany
+	@OneToMany //o MANY TO MANY TODO 
 	@JoinColumn(name="identificador")
 	private List<DuenioEntity> dueniosE;
 //	@OneToMany
-//	private List<InquilinoEntity> inquilinosE;
+//	private List<InquilinoEntity> inquilinosE; // puede ser inquilino de mas de una unidad? TODO
 	private String piso;
 	private String numero;
 	private String habitado;

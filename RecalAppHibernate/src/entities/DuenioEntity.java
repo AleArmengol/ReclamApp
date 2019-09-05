@@ -18,6 +18,7 @@ public class DuenioEntity {
 	
 	//DEBE ESTAR unidadE, que @ debe tener?
 	//private UnidadEntity unidadE;
+	
 
 	public int getId() {
 		return id;
