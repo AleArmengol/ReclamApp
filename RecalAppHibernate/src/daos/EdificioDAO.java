@@ -42,6 +42,8 @@ public class EdificioDAO {
 		s.beginTransaction();
 		EdificioEntity edificioE = (EdificioEntity) s.createQuery("from EdificioEntity ee where ee.codigo = ?")
 				.setInteger(0, codigo).uniqueResult();
+		s.getTransaction().commit();
+		s.close();
 		if(edificioE == null) {
 			throw new EdificioException("No existe el Edificio " + codigo); 
 		}

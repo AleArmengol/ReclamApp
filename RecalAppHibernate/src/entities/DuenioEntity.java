@@ -16,7 +16,8 @@ public class DuenioEntity {
 	
 	private String documento;
 	
-	
+	//DEBE ESTAR unidadE, que @ debe tener?
+	//private UnidadEntity unidadE;
 
 	public int getId() {
 		return id;
