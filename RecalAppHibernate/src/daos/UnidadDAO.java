@@ -46,6 +46,6 @@ public class UnidadDAO {
 
  Unidad toNegocio(UnidadEntity eu) {
 	Edificio aux = EdificioDAO.getInstance().toNegocio(eu.getEdificioE()); //Para construir un objeto Unidad 
-	return new Unidad(eu.getId(), eu.getPiso(), eu.getNumero(), aux);     //necesitamos un Objecto de Negocio Edificio
+	return new Unidad(eu.getIdentificador(), eu.getPiso(), eu.getNumero(), aux);     //necesitamos un Objecto de Negocio Edificio
 	}
 }

@@ -17,31 +17,34 @@ public class UnidadEntity {
 	
 	
 	@Id
-	@Column(name="identificador")
-	private int id;
+	private int identificador;
 	
 	@OneToMany //o MANY TO MANY TODO 
 	@JoinColumn(name="identificador")
 	private List<DuenioEntity> dueniosE;
-//	@OneToMany
-//	private List<InquilinoEntity> inquilinosE; // puede ser inquilino de mas de una unidad? TODO
-	private String piso;
-	private String numero;
-	private String habitado;
+	
+	@OneToMany
+	@JoinColumn(name="identificador")
+	private List<InquilinoEntity> inquilinosE; // puede ser inquilino de mas de una unidad? TODO
+	
 	@ManyToOne
 	@JoinColumn(name="codigoEdificio")
 	private EdificioEntity edificioE;
+	
+	private String piso;
+	private String numero;
+	private String habitado;
 	
 	public UnidadEntity() {
 		
 	}
 
-	public int getId() {
-		return id;
+	public int getIdentificador() {
+		return identificador;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int identificador) {
+		this.identificador = identificador;
 	}
 
 	public String getPiso() {

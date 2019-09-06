@@ -35,7 +35,7 @@ public class Test {
 			List<PersonaView> personas = null;
 			personas = Controlador.getInstancia().habilitadosPorEdificio(1);
 			for(PersonaView p : personas) {
-				System.out.println(p.getNombre());
+				System.out.println(p.getDocumento());
 			}
 		} catch (EdificioException e) {
 			System.out.println(e.getMessage());

@@ -5,6 +5,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
 
 import entities.DuenioEntity;
 import entities.EdificioEntity;
+import entities.InquilinoEntity;
 import entities.PersonaEntity;
 import entities.UnidadEntity;
 
@@ -20,6 +21,7 @@ public class HibernateUtil {
 			config.addAnnotatedClass(UnidadEntity.class);
 			config.addAnnotatedClass(DuenioEntity.class);
 			config.addAnnotatedClass(PersonaEntity.class);
+			config.addAnnotatedClass(InquilinoEntity.class);
 			sessionFactory = config.buildSessionFactory();
 		}
 		catch (Throwable ex) {

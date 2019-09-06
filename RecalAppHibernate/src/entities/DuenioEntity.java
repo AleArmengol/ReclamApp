@@ -2,6 +2,7 @@ package entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -11,14 +12,30 @@ public class DuenioEntity {
 	
 	@Id
 	private int id;
+
+	@ManyToOne
+	@JoinColumn(name="identificador")
+	private UnidadEntity unidadE;
+	@ManyToOne
+	@JoinColumn(name="documento")
+	private PersonaEntity personaE;
 	
-	private int identificador; //identificador de unidad
-	
-	private String documento;
-	
-	//DEBE ESTAR unidadE, que @ debe tener?
-	//private UnidadEntity unidadE;
-	
+
+	public UnidadEntity getUnidadE() {
+		return unidadE;
+	}
+
+	public void setUnidadE(UnidadEntity unidadE) {
+		this.unidadE = unidadE;
+	}
+
+	public PersonaEntity getPersonaE() {
+		return personaE;
+	}
+
+	public void setPersonaE(PersonaEntity duenioE) {
+		this.personaE = duenioE;
+	}
 
 	public int getId() {
 		return id;
@@ -28,21 +45,7 @@ public class DuenioEntity {
 		this.id = id;
 	}
 
-	public int getIdentificador() {
-		return identificador;
-	}
 
-	public void setIdentificador(int identificador) {
-		this.identificador = identificador;
-	}
-
-	public String getDocumento() {
-		return documento;
-	}
-
-	public void setDocumento(String documento) {
-		this.documento = documento;
-	}
 	
 	
 	

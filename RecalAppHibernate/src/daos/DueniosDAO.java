@@ -11,16 +11,16 @@ import modelo.Persona;
 
 public class DueniosDAO {
 	
-	private static DueniosDAO instancia;
+	private static DueniosDAO instance;
 	
 	
 	private DueniosDAO() {
 		
 	}
 	public static DueniosDAO getInstance() {
-		if(instancia == null) 
-			instancia = new DueniosDAO();
-		return instancia;
+		if(instance == null) 
+			instance = new DueniosDAO();
+		return instance;
 	}
 	
 	public List<Persona> getDueniosByUnidad(int id){
@@ -28,14 +28,18 @@ public class DueniosDAO {
 		List<DuenioEntity> dueniosE = new ArrayList<DuenioEntity>();
 		Session s = HibernateUtil.getSessionFactory().openSession();
 		s.beginTransaction();
-		dueniosE = s.createQuery("FROM UnidadEntity ue WHERE ue.dueniosE.identificador = ?").setInteger(0, id).list(); //TODO CONSULTAR
+		dueniosE = s.createQuery("FROM DuenioEntity de WHERE de.unidadE.identificador = ?").setInteger(0, id).list();
 		s.getTransaction().commit();
 		s.close();
 		for(DuenioEntity de: dueniosE) {
-			dueniosN.add(PersonaDAO.getInstance().findById(de.getDocumento())); //TODO preguntar
+			dueniosN.add(toNegocio(de));
 		}
 		
 		return dueniosN;
+	}
+	
+	Persona toNegocio(DuenioEntity duenioE) {
+		return new Persona(duenioE.getPersonaE().getDocumento(), duenioE.getPersonaE().getNombre());
 	}
 
 }

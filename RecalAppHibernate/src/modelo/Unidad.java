@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import daos.DueniosDAO;
+import daos.InquilinosDAO;
 import exceptions.UnidadException;
 import views.EdificioView;
 import views.UnidadView;
@@ -89,7 +90,7 @@ public class Unidad {
 	}
 
 	public List<Persona> getInquilinos() {
-		return inquilinos;
+		return InquilinosDAO.getInstance().getInquilinosByUnidad(this.id);
 	}
 
 	public UnidadView toView() {

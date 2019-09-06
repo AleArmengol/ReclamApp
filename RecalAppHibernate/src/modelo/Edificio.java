@@ -33,9 +33,9 @@ public class Edificio {
 			List<Persona> duenios = unidad.getDuenios();
 			for(Persona p : duenios)
 				habilitados.add(p);
-//			List<Persona> inquilinos = unidad.getInquilinos(); //TODO
-//			for(Persona p : inquilinos)
-//				habilitados.add(p);
+			List<Persona> inquilinos = unidad.getInquilinos(); //TODO
+			for(Persona p : inquilinos)
+				habilitados.add(p);
 		}
 		return habilitados;
 	}
