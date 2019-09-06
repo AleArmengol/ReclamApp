@@ -3,12 +3,9 @@ package test;
 import java.util.List;
 
 import controlador.Controlador;
-import daos.UnidadDAO;
 import exceptions.EdificioException;
-import exceptions.UnidadException;
 import views.EdificioView;
 import views.PersonaView;
-import views.UnidadView;
 
 public class Test {
 
