@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import daos.EdificioDAO;
+import daos.UnidadDAO;
 import exceptions.EdificioException;
 import exceptions.PersonaException;
 import exceptions.ReclamoException;
@@ -184,8 +185,8 @@ public class Controlador {
 		return EdificioDAO.getInstance().findById(codigo);
 	}
 
-	private Unidad buscarUnidad(int codigo, String piso, String numero) throws UnidadException{
-		return null;
+	private Unidad buscarUnidad(int codigo, String piso, String numero) throws UnidadException{ // es raro que entre "codigo" cuando el pk es "identificador", preguntar
+		return UnidadDAO.getInstance().findUnidad(codigo, piso, numero);
 	}	
 	
 	private Persona buscarPersona(String documento) throws PersonaException {

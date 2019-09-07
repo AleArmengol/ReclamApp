@@ -5,7 +5,10 @@ import java.util.List;
 
 import org.hibernate.classic.Session;
 
+import entities.EdificioEntity;
 import entities.UnidadEntity;
+import exceptions.EdificioException;
+import exceptions.UnidadException;
 import hibernate.HibernateUtil;
 import modelo.Edificio;
 import modelo.Unidad;
@@ -43,9 +46,22 @@ public class UnidadDAO {
 		return unidadesN;
 		
 	}
+	public Unidad findUnidad(int codigo, String piso, String numero) throws UnidadException {
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		UnidadEntity unidadE = (UnidadEntity) s.createQuery("from UnidadEntity ue where ue.edificioE.codigo = ? and ue.piso = ? and ue.numero = ?")
+				.setInteger(0, codigo).setString(1, piso).setString(2, numero).uniqueResult();
+		s.getTransaction().commit();
+		s.close();
+		if(unidadE == null) {
+			throw new UnidadException("No existe la Unidad" + numero + "en el piso" + piso +"del edificio" + codigo ); 
+		}
+		System.out.println(unidadE.getIdentificador());
+		return toNegocio(unidadE);
+	}
 
- Unidad toNegocio(UnidadEntity eu) {
-	Edificio aux = EdificioDAO.getInstance().toNegocio(eu.getEdificioE()); //Para construir un objeto Unidad 
-	return new Unidad(eu.getIdentificador(), eu.getPiso(), eu.getNumero(), aux);     //necesitamos un Objecto de Negocio Edificio
+ Unidad toNegocio(UnidadEntity ue) {
+	Edificio aux = EdificioDAO.getInstance().toNegocio(ue.getEdificioE()); //Para construir un objeto Unidad 
+	return new Unidad(ue.getIdentificador(), ue.getPiso(), ue.getNumero(), aux);     //necesitamos un Objecto de Negocio Edificio
 	}
 }

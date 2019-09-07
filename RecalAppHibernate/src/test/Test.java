@@ -3,9 +3,9 @@ package test;
 import java.util.List;
 
 import controlador.Controlador;
-import exceptions.EdificioException;
+import exceptions.UnidadException;
 import views.EdificioView;
-import views.PersonaView;
+import views.UnidadView;
 
 public class Test {
 
@@ -17,7 +17,17 @@ public class Test {
 			System.out.println(e.getNombre());
 			
 		}
+		// busca una unidad de un edificio
+//		try {
+////		UnidadView unidadV = null;
+//			unidadV = Controlador.getInstancia().buscarUnidad(5, "6", "5");
+//			System.out.println(unidadV.getId());
+//		}
+//	} 	catch (UnidadException u) {
+//		System.out.println(u.getMessage());
+//	}
 		
+		// trae las unidades por edificio
 //		try {
 //			List<UnidadView> unidades = null;
 //			unidades = Controlador.getInstancia().getUnidadesPorEdificio(2);
@@ -27,20 +37,16 @@ public class Test {
 //		} catch (EdificioException e) {
 //			System.out.println(e.getMessage());
 //		}
-		
-		try {
-			List<PersonaView> personas = null;
-			personas = Controlador.getInstancia().habilitadosPorEdificio(1);
-			for(PersonaView p : personas) {
-				System.out.println(p.getDocumento());
-			}
-		} catch (EdificioException e) {
-			System.out.println(e.getMessage());
-		}
-		
-		
+		// trae las personas habilitadas por edificio
+//		try {
+//			List<PersonaView> personas = null;
+//			personas = Controlador.getInstancia().habilitadosPorEdificio(1);
+//			for(PersonaView p : personas) {
+//				System.out.println(p.getDocumento());
+//			}
+//		} catch (EdificioException e) {
+//			System.out.println(e.getMessage());
+//		}	
 	}
-
-	
 }
 

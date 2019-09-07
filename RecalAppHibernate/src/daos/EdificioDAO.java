@@ -9,7 +9,6 @@ import entities.EdificioEntity;
 import exceptions.EdificioException;
 import hibernate.HibernateUtil;
 import modelo.Edificio;
-import modelo.Unidad;
 
 public class EdificioDAO {
 	
