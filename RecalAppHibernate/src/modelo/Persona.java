@@ -1,5 +1,6 @@
 package modelo;
 
+import daos.PersonaDAO;
 import views.PersonaView;
 
 public class Persona {
@@ -23,9 +24,9 @@ public class Persona {
 	public PersonaView toView() {
 		return new PersonaView(documento, nombre);
 	}
-
+	
 	public void save() {
-		
+		PersonaDAO.getInstance().save(this);
 	}
 
 	public void delete() {

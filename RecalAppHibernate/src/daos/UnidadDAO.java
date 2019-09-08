@@ -56,7 +56,6 @@ public class UnidadDAO {
 		if(unidadE == null) {
 			throw new UnidadException("No existe la Unidad" + numero + "en el piso" + piso +"del edificio" + codigo ); 
 		}
-		System.out.println(unidadE.getIdentificador());
 		return toNegocio(unidadE);
 	}
 
