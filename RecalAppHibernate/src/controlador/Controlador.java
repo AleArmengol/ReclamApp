@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import daos.EdificioDAO;
+import daos.PersonaDAO;
 import daos.UnidadDAO;
 import exceptions.EdificioException;
 import exceptions.PersonaException;
@@ -106,29 +107,29 @@ public class Controlador {
 	public void agregarDuenioUnidad(int codigo, String piso, String numero, String documento) throws UnidadException, PersonaException {
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
 		Persona persona = buscarPersona(documento);
-		unidad.agregarDuenio(persona);
+		unidad.agregarDuenio(persona);// hay que hacer el save de duenio en la Entity dueños
 	}
 
 	public void alquilarUnidad(int codigo, String piso, String numero, String documento) throws UnidadException, PersonaException{
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
 		Persona persona = buscarPersona(documento);
-		unidad.alquilar(persona);
+		unidad.alquilar(persona);// hay que hacer el save de inquilino en la Entity inquilino
 	}
 
 	public void agregarInquilinoUnidad(int codigo, String piso, String numero, String documento) throws UnidadException, PersonaException{
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
 		Persona persona = buscarPersona(documento);
-		unidad.agregarInquilino(persona);
+		unidad.agregarInquilino(persona);// hay que hacer el save de inquilino en la Entity inquilino
 	}
 
 	public void liberarUnidad(int codigo, String piso, String numero) throws UnidadException {
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
-		unidad.liberar();
+		unidad.liberar();//falta hacer el update de la unidad
 	}
 	
 	public void habitarUnidad(int codigo, String piso, String numero) throws UnidadException {
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
-		unidad.habitar();
+		unidad.habitar();// hacer update en unidad
 	}
 	
 	public void agregarPersona(String documento, String nombre) {
@@ -190,7 +191,7 @@ public class Controlador {
 	}	
 	
 	private Persona buscarPersona(String documento) throws PersonaException {
-		return null;
+		return PersonaDAO.getInstance().findPersonaById(documento);
 	}
 	
 	private Reclamo buscarReclamo(int numero) throws ReclamoException {

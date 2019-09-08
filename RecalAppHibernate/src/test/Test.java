@@ -3,8 +3,10 @@ package test;
 import java.util.List;
 
 import controlador.Controlador;
+import daos.PersonaDAO;
 import exceptions.UnidadException;
 import views.EdificioView;
+import views.PersonaView;
 import views.UnidadView;
 
 public class Test {
@@ -47,6 +49,8 @@ public class Test {
 //		} catch (EdificioException e) {
 //			System.out.println(e.getMessage());
 //		}	
+		
+
 	}
 }
 

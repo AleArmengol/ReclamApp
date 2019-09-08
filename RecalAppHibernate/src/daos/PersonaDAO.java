@@ -19,12 +19,14 @@ public class PersonaDAO {
 		return instance;
 	}
 	
-	public Persona findById(String documento) {
+	public Persona findPersonaById(String documento) {
 		PersonaEntity personaE = null;
 		Session s = HibernateUtil.getSessionFactory().openSession();
 		s.beginTransaction();
 		personaE = (PersonaEntity) s.createQuery("FROM PersonaEntity pe WHERE pe.documento = ?").setString(0, documento).uniqueResult();
 		Persona personaN = new Persona(personaE.getDocumento(), personaE.getNombre());
+		s.getTransaction().commit();
+		s.close();
 		return personaN;
 	}
 }
