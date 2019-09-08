@@ -14,7 +14,12 @@ public class PersonaEntity {
 	private String documento;
 	private String nombre;
 	
+	public PersonaEntity() { }
 	
+	public PersonaEntity(String documento2, String nombre2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getDocumento() {
 		return documento;
 	}

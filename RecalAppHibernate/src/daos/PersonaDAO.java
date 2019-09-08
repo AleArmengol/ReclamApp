@@ -27,4 +27,16 @@ public class PersonaDAO {
 		Persona personaN = new Persona(personaE.getDocumento(), personaE.getNombre());
 		return personaN;
 	}
+	public void save(Persona persona){
+		PersonaEntity aGuardar = toEntity(persona);
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		s.save(aGuardar);
+		s.getTransaction().commit();
+		s.close();
+	}
+	private PersonaEntity toEntity(Persona persona){
+		return new PersonaEntity(persona.getDocumento(), persona.getNombre());
+	} 
+	
 }
