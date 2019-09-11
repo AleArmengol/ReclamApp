@@ -6,8 +6,11 @@ import java.util.List;
 import org.hibernate.Session;
 
 import entities.DuenioEntity;
+import entities.PersonaEntity;
+import entities.UnidadEntity;
 import hibernate.HibernateUtil;
 import modelo.Persona;
+import modelo.Unidad;
 
 public class DueniosDAO {
 	
@@ -38,8 +41,19 @@ public class DueniosDAO {
 		return dueniosN;
 	}
 	
+	public void save(Persona duenioN, Unidad unidadN) {
+		PersonaEntity personaE = PersonaDAO.getInstance().toEntity(duenioN);
+		UnidadEntity unidadE = UnidadDAO.getInstance().toEntity(unidadN);
+		DuenioEntity duenioE = new DuenioEntity(personaE, unidadE);
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		s.save(duenioE);
+		s.getTransaction().commit();
+		s.close();
+	}
+	
 	Persona toNegocio(DuenioEntity duenioE) {
 		return new Persona(duenioE.getPersonaE().getDocumento(), duenioE.getPersonaE().getNombre());
 	}
-
+	
 }

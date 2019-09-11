@@ -18,7 +18,7 @@ public class UnidadEntity {
 	@Id
 	private int identificador;
 	
-	@OneToMany //o MANY TO MANY TODO 
+	@OneToMany //TODO porque no es many to many si un duenio puede tener mas de una unidad 
 	@JoinColumn(name="identificador")
 	private List<DuenioEntity> dueniosE;
 	
@@ -30,9 +30,17 @@ public class UnidadEntity {
 	@JoinColumn(name="codigoEdificio")
 	private EdificioEntity edificioE;
 	
-	private String piso;
 	private String numero;
+	private String piso;
 	private String habitado;
+	
+	public UnidadEntity(String numero, String piso, String habitado, int id) {
+		this.numero = numero;
+		this.piso = piso;
+		this.habitado = habitado;
+		this.identificador = id;
+		
+	}
 	
 	public UnidadEntity() {
 		

@@ -17,7 +17,8 @@ public class PersonaEntity {
 	public PersonaEntity() { }
 	
 	public PersonaEntity(String documento2, String nombre2) {
-		// TODO Auto-generated constructor stub
+		documento = documento2;
+		nombre = nombre2;
 	}
 
 	public String getDocumento() {

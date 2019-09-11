@@ -63,4 +63,15 @@ public class UnidadDAO {
 	Edificio aux = EdificioDAO.getInstance().toNegocio(ue.getEdificioE()); //Para construir un objeto Unidad 
 	return new Unidad(ue.getIdentificador(), ue.getPiso(), ue.getNumero(), aux);     //necesitamos un Objecto de Negocio Edificio
 	}
+
+ UnidadEntity toEntity(Unidad unidadN) {
+	 String habitado;
+	 if(unidadN.isHabitado()) {
+		 habitado = "S";
+	 } else {
+		 habitado = "N";
+	 }
+	 
+	 return new UnidadEntity(unidadN.getNumero(), unidadN.getPiso(),habitado, unidadN.getId());
+	 }
 }

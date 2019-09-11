@@ -26,7 +26,7 @@ public class Controlador {
 	private static Controlador instancia;
 	
 	private Controlador() {
-		//Comentario de prueba
+		
 	}
 	
 	public static Controlador getInstancia() {
@@ -107,7 +107,7 @@ public class Controlador {
 	public void agregarDuenioUnidad(int codigo, String piso, String numero, String documento) throws UnidadException, PersonaException {
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
 		Persona persona = buscarPersona(documento);
-		unidad.agregarDuenio(persona);// hay que hacer el save de duenio en la Entity dueños
+		unidad.agregarDuenio(persona);// esta hecho, TODO comprobar si funciona
 	}
 
 	public void alquilarUnidad(int codigo, String piso, String numero, String documento) throws UnidadException, PersonaException{

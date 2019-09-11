@@ -37,7 +37,7 @@ public class PersonaDAO {
 		s.getTransaction().commit();
 		s.close();
 	}
-	private PersonaEntity toEntity(Persona persona){
+	PersonaEntity toEntity(Persona persona){
 		return new PersonaEntity(persona.getDocumento(), persona.getNombre());
 	} 
 	

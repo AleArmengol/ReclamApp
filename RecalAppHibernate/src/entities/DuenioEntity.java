@@ -1,6 +1,8 @@
 package entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,6 +13,7 @@ import javax.persistence.Table;
 public class DuenioEntity {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@ManyToOne
@@ -20,6 +23,15 @@ public class DuenioEntity {
 	@JoinColumn(name="documento")
 	private PersonaEntity personaE;
 	
+	
+	public DuenioEntity() {
+		
+	}
+	
+	public DuenioEntity(PersonaEntity personaEntity, UnidadEntity unidadEntity) {
+		unidadE = unidadEntity;
+		personaE = personaEntity; 
+	}
 
 	public UnidadEntity getUnidadE() {
 		return unidadE;

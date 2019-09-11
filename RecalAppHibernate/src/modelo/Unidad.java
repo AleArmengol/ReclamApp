@@ -36,6 +36,7 @@ public class Unidad {
 	
 	public void agregarDuenio(Persona duenio) {
 		duenios.add(duenio);
+		DueniosDAO.getInstance().save(duenio, this);
 	}
 	
 	public void alquilar(Persona inquilino) throws UnidadException {
@@ -91,6 +92,15 @@ public class Unidad {
 
 	public List<Persona> getInquilinos() {
 		return InquilinosDAO.getInstance().getInquilinosByUnidad(this.id);
+	}
+	
+
+	public boolean isHabitado() {
+		return habitado;
+	}
+
+	public void setHabitado(boolean habitado) {
+		this.habitado = habitado;
 	}
 
 	public UnidadView toView() {

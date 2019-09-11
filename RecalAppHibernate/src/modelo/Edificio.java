@@ -28,12 +28,12 @@ public class Edificio {
 	
 	public Set<Persona> habilitados(){
 		Set<Persona> habilitados = new HashSet<Persona>();
-		this.unidades = this.getUnidades(); //CONSULTAR TODO
+		this.unidades = this.getUnidades();
 		for(Unidad unidad : unidades) {
 			List<Persona> duenios = unidad.getDuenios();
 			for(Persona p : duenios)
 				habilitados.add(p);
-			List<Persona> inquilinos = unidad.getInquilinos(); //TODO
+			List<Persona> inquilinos = unidad.getInquilinos();
 			for(Persona p : inquilinos)
 				habilitados.add(p);
 		}

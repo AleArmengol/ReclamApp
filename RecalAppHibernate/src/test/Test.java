@@ -4,6 +4,8 @@ import java.util.List;
 
 import controlador.Controlador;
 import daos.PersonaDAO;
+import exceptions.EdificioException;
+import exceptions.PersonaException;
 import exceptions.UnidadException;
 import views.EdificioView;
 import views.PersonaView;
@@ -13,11 +15,11 @@ public class Test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+
 		List<EdificioView> edificios = Controlador.getInstancia().getEdificios();
-		for(EdificioView e : edificios) {
+		for (EdificioView e : edificios) {
 			System.out.println(e.getNombre());
-			
+
 		}
 		// busca una unidad de un edificio
 //		try {
@@ -28,7 +30,7 @@ public class Test {
 //	} 	catch (UnidadException u) {
 //		System.out.println(u.getMessage());
 //	}
-		
+
 		// trae las unidades por edificio
 //		try {
 //			List<UnidadView> unidades = null;
@@ -48,9 +50,13 @@ public class Test {
 //			}
 //		} catch (EdificioException e) {
 //			System.out.println(e.getMessage());
-//		}	
-		
+//		}
+		try {
+			Controlador.getInstancia().agregarDuenioUnidad(1, "10", "6", "DNI30616697");
+		} catch (UnidadException | PersonaException e1) {
+			
+			System.out.println(e1.getMessage());
+		}
 
 	}
 }
-
