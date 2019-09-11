@@ -163,6 +163,5 @@ local.properties
 .worksheet
 hibernate.properties
 .properties
-.classpath
-.project
+RecalAppHibernate/.project
 RecalAppHibernate/.classpath
