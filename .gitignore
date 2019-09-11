@@ -161,7 +161,6 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
-hibernate.properties
-.properties
+RecalAppHibernate/src/hibernate.properties
 RecalAppHibernate/.project
 RecalAppHibernate/.classpath
