@@ -1,8 +1,11 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,15 +19,16 @@ public class UnidadEntity {
 	
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int identificador;
 	
-	@OneToMany //TODO porque no es many to many si un duenio puede tener mas de una unidad 
+	@OneToMany
 	@JoinColumn(name="identificador")
 	private List<DuenioEntity> dueniosE;
 	
 	@OneToMany
 	@JoinColumn(name="identificador")
-	private List<InquilinoEntity> inquilinosE; // puede ser inquilino de mas de una unidad? TODO
+	private List<InquilinoEntity> inquilinosE;
 	
 	@ManyToOne
 	@JoinColumn(name="codigoEdificio")
@@ -39,6 +43,7 @@ public class UnidadEntity {
 		this.piso = piso;
 		this.habitado = habitado;
 		this.identificador = id;
+		this.dueniosE = new ArrayList<DuenioEntity>();
 		
 	}
 	

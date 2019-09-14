@@ -1,6 +1,8 @@
 package entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,6 +14,7 @@ import modelo.Persona;
 @Table(name = "inquilinos")
 public class InquilinoEntity {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@ManyToOne
@@ -21,6 +24,15 @@ public class InquilinoEntity {
 	@ManyToOne
 	@JoinColumn(name="documento")
 	private PersonaEntity personaE;
+	
+	public InquilinoEntity() {
+		
+	}
+
+	public InquilinoEntity(PersonaEntity personaE2, UnidadEntity unidadE2) {
+		personaE = personaE2;
+		unidadE = unidadE2;
+	}
 
 	public int getId() {
 		return id;

@@ -107,7 +107,7 @@ public class Controlador {
 	public void agregarDuenioUnidad(int codigo, String piso, String numero, String documento) throws UnidadException, PersonaException {
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
 		Persona persona = buscarPersona(documento);
-		unidad.agregarDuenio(persona);// esta hecho, TODO comprobar si funciona
+		unidad.agregarDuenio(persona);
 	}
 
 	public void alquilarUnidad(int codigo, String piso, String numero, String documento) throws UnidadException, PersonaException{
@@ -186,7 +186,7 @@ public class Controlador {
 		return EdificioDAO.getInstance().findById(codigo);
 	}
 
-	private Unidad buscarUnidad(int codigo, String piso, String numero) throws UnidadException{ // es raro que entre "codigo" cuando el pk es "identificador", preguntar
+	private Unidad buscarUnidad(int codigo, String piso, String numero) throws UnidadException{
 		return UnidadDAO.getInstance().findUnidad(codigo, piso, numero);
 	}	
 	

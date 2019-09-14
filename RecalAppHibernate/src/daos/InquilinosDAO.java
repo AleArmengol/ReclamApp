@@ -6,8 +6,11 @@ import java.util.List;
 import org.hibernate.Session;
 
 import entities.InquilinoEntity;
+import entities.PersonaEntity;
+import entities.UnidadEntity;
 import hibernate.HibernateUtil;
 import modelo.Persona;
+import modelo.Unidad;
 
 public class InquilinosDAO {
 	private static InquilinosDAO instance;
@@ -39,5 +42,17 @@ public class InquilinosDAO {
 	
 	Persona toNegocio(InquilinoEntity inquilinoE) {
 		return new Persona(inquilinoE.getPersonaE().getDocumento(), inquilinoE.getPersonaE().getDocumento());
+	}
+
+	public void save(Persona inquilino, Unidad unidad) {
+		PersonaEntity personaE = PersonaDAO.getInstance().toEntity(inquilino);
+		UnidadEntity unidadE = UnidadDAO.getInstance().toEntity(unidad);
+		InquilinoEntity inquilinoE = new InquilinoEntity(personaE, unidadE);
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		s.save(inquilinoE);
+		s.getTransaction().commit();
+		s.close();
+		
 	}
 }

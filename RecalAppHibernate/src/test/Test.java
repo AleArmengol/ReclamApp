@@ -16,11 +16,12 @@ public class Test {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		List<EdificioView> edificios = Controlador.getInstancia().getEdificios();
-		for (EdificioView e : edificios) {
-			System.out.println(e.getNombre());
-
-		}
+		//Trae todos los edificios
+//		List<EdificioView> edificios = Controlador.getInstancia().getEdificios();
+//		for (EdificioView e : edificios) {
+//			System.out.println(e.getNombre());
+//
+//		}
 		// busca una unidad de un edificio
 //		try {
 ////		UnidadView unidadV = null;
@@ -51,12 +52,23 @@ public class Test {
 //		} catch (EdificioException e) {
 //			System.out.println(e.getMessage());
 //		}
+		
+		//Agrega una persona como duenio a una unidad
+//		try {
+//			Controlador.getInstancia().agregarDuenioUnidad(1, "10", "6", "DNI30616697");
+//		} catch (UnidadException | PersonaException e1) {
+//			
+//			System.out.println(e1.getMessage());
+//		}
+		
+		//Agregar registro de persona a la base de datos
 		try {
-			Controlador.getInstancia().agregarDuenioUnidad(1, "10", "6", "DNI30616697");
-		} catch (UnidadException | PersonaException e1) {
-			
-			System.out.println(e1.getMessage());
+			Controlador.getInstancia().alquilarUnidad(1, "10", "6", "DNI41614393");
+		} catch (UnidadException | PersonaException e) {
+			System.out.println(e.getMessage());
 		}
+		
+		
 
 	}
 }

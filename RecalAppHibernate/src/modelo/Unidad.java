@@ -5,6 +5,7 @@ import java.util.List;
 
 import daos.DueniosDAO;
 import daos.InquilinosDAO;
+import daos.UnidadDAO;
 import exceptions.UnidadException;
 import views.EdificioView;
 import views.UnidadView;
@@ -44,6 +45,8 @@ public class Unidad {
 			this.habitado = true;
 			inquilinos = new ArrayList<Persona>();
 			inquilinos.add(inquilino);
+			InquilinosDAO.getInstance().save(inquilino, this);
+			UnidadDAO.getInstance().update(this);
 		}
 		else
 			throw new UnidadException("La unidad esta ocupada");
