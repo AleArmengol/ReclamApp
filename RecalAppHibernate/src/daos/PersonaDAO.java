@@ -39,6 +39,10 @@ public class PersonaDAO {
 	}
 	PersonaEntity toEntity(Persona persona){
 		return new PersonaEntity(persona.getDocumento(), persona.getNombre());
+	}
+
+	public Persona toNegocio(PersonaEntity usuarioE) {
+		return new Persona(usuarioE.getDocumento(), usuarioE.getNombre());
 	} 
 	
 }

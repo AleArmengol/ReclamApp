@@ -6,6 +6,7 @@ import java.util.Set;
 
 import daos.EdificioDAO;
 import daos.PersonaDAO;
+import daos.ReclamoDAO;
 import daos.UnidadDAO;
 import exceptions.EdificioException;
 import exceptions.PersonaException;
@@ -113,23 +114,23 @@ public class Controlador {
 	public void alquilarUnidad(int codigo, String piso, String numero, String documento) throws UnidadException, PersonaException{
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
 		Persona persona = buscarPersona(documento);
-		unidad.alquilar(persona);// hay que hacer el save de inquilino en la Entity inquilino
+		unidad.alquilar(persona);// hay que hacer el save de inquilino en la Entity inquilino TODO
 	}
 
 	public void agregarInquilinoUnidad(int codigo, String piso, String numero, String documento) throws UnidadException, PersonaException{
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
 		Persona persona = buscarPersona(documento);
-		unidad.agregarInquilino(persona);// hay que hacer el save de inquilino en la Entity inquilino
+		unidad.agregarInquilino(persona);// hay que hacer el save de inquilino en la Entity inquilino TODO
 	}
 
 	public void liberarUnidad(int codigo, String piso, String numero) throws UnidadException {
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
-		unidad.liberar();//falta hacer el update de la unidad
+		unidad.liberar();//falta hacer el update de la unidad TODO
 	}
 	
 	public void habitarUnidad(int codigo, String piso, String numero) throws UnidadException {
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
-		unidad.habitar();// hacer update en unidad
+		unidad.habitar();// hacer update en unidad TODO
 	}
 	
 	public void agregarPersona(String documento, String nombre) {
@@ -142,23 +143,29 @@ public class Controlador {
 		persona.delete();
 	}
 	
-	public List<ReclamoView> reclamosPorEdificio(int codigo){
-		List<ReclamoView> resultado = new ArrayList<ReclamoView>();
-		return resultado;
+	public List<ReclamoView> reclamosPorEdificio(int codigo) throws EdificioException{
+		List<ReclamoView> reclamosV = new ArrayList<ReclamoView>(); //TODO
+		List<Reclamo> reclamosN = new ArrayList<Reclamo>();
+		Edificio edificioN = buscarEdificio(codigo);
+		reclamosN = ReclamoDAO.getInstance().getReclamosByEdificio(codigo);
+		for(Reclamo rn: reclamosN) {
+			reclamosV.add(rn.toView());
+		}
+		return reclamoV;
 	}
 	
 	public List<ReclamoView> reclamosPorUnidad(int codigo, String piso, String numero) {
-		List<ReclamoView> resultado = new ArrayList<ReclamoView>();
+		List<ReclamoView> resultado = new ArrayList<ReclamoView>(); //TODO
 		return resultado;
 	}
 	
 	public ReclamoView reclamosPorNumero(int numero) {
-		ReclamoView resultado = null;
+		ReclamoView resultado = null; //TODO
 		return resultado;
 	}
 	
 	public List<ReclamoView> reclamosPorPersona(String documento) {
-		List<ReclamoView> resultado = new ArrayList<ReclamoView>();
+		List<ReclamoView> resultado = new ArrayList<ReclamoView>(); //TODO
 		return resultado;
 	}
  
@@ -167,16 +174,16 @@ public class Controlador {
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
 		Persona persona = buscarPersona(documento);
 		Reclamo reclamo = new Reclamo(persona, edificio, ubicación, descripcion, unidad);
-		reclamo.save();
+		reclamo.save(); //TODO
 		return reclamo.getNumero();
 	}
 	
 	public void agregarImagenAReclamo(int numero, String direccion, String tipo) throws ReclamoException {
-		Reclamo reclamo = buscarReclamo(numero);
+		Reclamo reclamo = buscarReclamo(numero); //TODO
 		reclamo.agregarImagen(direccion, tipo);
 	}
 	
-	public void cambiarEstado(int numero, Estado estado) throws ReclamoException {
+	public void cambiarEstado(int numero, Estado estado) throws ReclamoException { //TODO
 		Reclamo reclamo = buscarReclamo(numero);
 		reclamo.cambiarEstado(estado);
 		reclamo.update();

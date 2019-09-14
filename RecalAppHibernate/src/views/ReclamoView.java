@@ -17,4 +17,6 @@ public class ReclamoView {
 	private UnidadView unidad;
 	private Estado estado;
 	private List<ImagenView> imagenes;
+	
+	
 }
