@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Session;
 
 import entities.ReclamoEntity;
+import exceptions.ReclamoException;
 import hibernate.HibernateUtil;
 import modelo.Edificio;
 import modelo.Persona;
@@ -44,6 +45,18 @@ public class ReclamoDAO {
 		Unidad unidadN = UnidadDAO.getInstance().toNegocio(re.getUnidadE());
 		
 		return new Reclamo(personaN, edificioN, re.getUbicacion(), re.getDescripcion(), unidadN);
+	}
+
+	public Reclamo findById(int numero) throws ReclamoException{
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		ReclamoEntity reclamoE = (ReclamoEntity) s.createQuery("from ReclamoEntity re where re.idReclamo = ?").setInteger(0, numero).uniqueResult();
+		s.getTransaction().commit();
+		s.close();
+		if(reclamoE == null) {
+			throw new ReclamoException("No existe el Reclamo " + numero);
+		}
+		return toNegocio(reclamoE);
 	}
 
 }

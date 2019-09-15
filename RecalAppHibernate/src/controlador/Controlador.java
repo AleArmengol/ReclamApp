@@ -179,8 +179,8 @@ public class Controlador {
 	}
 	
 	public void agregarImagenAReclamo(int numero, String direccion, String tipo) throws ReclamoException {
-		Reclamo reclamo = buscarReclamo(numero); //TODO
-		reclamo.agregarImagen(direccion, tipo);
+		Reclamo reclamo = buscarReclamo(numero); 
+		reclamo.agregarImagen(direccion, tipo); //TODO
 	}
 	
 	public void cambiarEstado(int numero, Estado estado) throws ReclamoException { //TODO
@@ -202,6 +202,6 @@ public class Controlador {
 	}
 	
 	private Reclamo buscarReclamo(int numero) throws ReclamoException {
-		return null;
+		return ReclamoDAO.getInstance().findById(numero);
 	}
 }
