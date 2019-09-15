@@ -37,7 +37,7 @@ public class ReclamoDAO {
 		}
 		return reclamosN;
 	}
-
+	
 	private Reclamo toNegocio(ReclamoEntity re) {
 		Persona personaN = PersonaDAO.getInstance().toNegocio(re.getUsuarioE());
 		Edificio edificioN = EdificioDAO.getInstance().toNegocio(re.getEdificioE());
