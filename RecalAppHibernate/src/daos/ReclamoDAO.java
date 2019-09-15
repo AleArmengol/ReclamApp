@@ -59,4 +59,17 @@ public class ReclamoDAO {
 		return toNegocio(reclamoE);
 	}
 
+	public List<Reclamo> getReclamosByUnidad(int codigo) {
+		List<Reclamo> reclamosN = new ArrayList<Reclamo>();
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		List<ReclamoEntity> reclamosE = s.createQuery("FROM ReclamoEntity re WHERE re.identificador = ?").list();
+		s.getTransaction().commit();
+		s.close();
+		for(ReclamoEntity re: reclamosE) {
+			reclamosN.add(toNegocio(re));
+		}
+		return reclamosN;
+	}
+
 }

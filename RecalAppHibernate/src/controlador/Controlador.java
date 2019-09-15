@@ -156,10 +156,11 @@ public class Controlador {
 	
 	public List<ReclamoView> reclamosPorUnidad(int codigo, String piso, String numero) {
 		List<ReclamoView> resultado = new ArrayList<ReclamoView>(); //TODO
+		List<Reclamo> reclamosN = ReclamoDAO.getInstance().getReclamosByUnidad(codigo);
 		return resultado;
 	}
 	
-	public ReclamoView reclamosPorNumero(int numero) {
+	public ReclamoView reclamosPorNumero(int numero) { //PREGUNTAR QUE ES? ES LO MISMO QUE FIND BY ID?
 		ReclamoView resultado = null; //TODO
 		return resultado;
 	}
