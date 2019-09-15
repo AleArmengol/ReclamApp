@@ -37,6 +37,16 @@ public class PersonaDAO {
 		s.getTransaction().commit();
 		s.close();
 	}
+	
+	public void delete (Persona persona) {
+		PersonaEntity aEliminar= toEntity(persona);
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		s.delete(aEliminar);
+		s.getTransaction().commit();
+		s.close();
+	}
+		
 	PersonaEntity toEntity(Persona persona){
 		return new PersonaEntity(persona.getDocumento(), persona.getNombre());
 	}

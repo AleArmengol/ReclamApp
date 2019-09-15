@@ -39,6 +39,15 @@ public class ReclamoEntity {
 		
 	}
 	
+	public ReclamoEntity(PersonaEntity personaE, EdificioEntity edificioE2, String ubicación, String descripcion2,
+			UnidadEntity unidadE2) {
+		
+		this.usuarioE=personaE;
+		this.edificioE=edificioE2;
+		this.ubicacion=ubicación;
+		this.descripcion=descripcion2;
+		this.unidadE=unidadE2;		
+	}
 
 	public int getIdReclamo() {
 		return idReclamo;

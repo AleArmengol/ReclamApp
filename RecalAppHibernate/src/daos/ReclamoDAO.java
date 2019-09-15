@@ -5,7 +5,10 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import entities.EdificioEntity;
+import entities.PersonaEntity;
 import entities.ReclamoEntity;
+import entities.UnidadEntity;
 import hibernate.HibernateUtil;
 import modelo.Edificio;
 import modelo.Persona;
@@ -36,6 +39,22 @@ public class ReclamoDAO {
 			reclamosN.add(toNegocio(re));
 		}
 		return reclamosN;
+	}
+	
+	public void save (Reclamo reclamo) {
+		ReclamoEntity aGuardar= toEntity(reclamo);
+		Session s =HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		s.save(aGuardar);
+		s.getTransaction().commit();
+		s.close();
+	}
+	
+	ReclamoEntity toEntity(Reclamo reclamo) {
+		PersonaEntity personaE = PersonaDAO.getInstance().toEntity(reclamo.getUsuario());
+		EdificioEntity edificioE = EdificioDAO.getInstance().toEntity(reclamo.getEdificio());
+		UnidadEntity UnidadE=UnidadDAO.getInstance().toEntity(reclamo.getUnidad());
+		return new ReclamoEntity(personaE, edificioE, reclamo.getUbicación(), reclamo.getDescripcion(),UnidadE);
 	}
 
 	private Reclamo toNegocio(ReclamoEntity re) {
