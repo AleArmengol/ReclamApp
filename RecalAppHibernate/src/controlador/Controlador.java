@@ -155,9 +155,12 @@ public class Controlador {
 	}
 	
 	public List<ReclamoView> reclamosPorUnidad(int codigo, String piso, String numero) {
-		List<ReclamoView> resultado = new ArrayList<ReclamoView>(); //TODO
+		List<ReclamoView> reclamosV = new ArrayList<ReclamoView>(); //TODO
 		List<Reclamo> reclamosN = ReclamoDAO.getInstance().getReclamosByUnidad(codigo);
-		return resultado;
+		for(Reclamo rn : reclamosN) {
+			reclamosV.add(rn.toView());
+		}
+		return reclamosV;
 	}
 	
 	public ReclamoView reclamosPorNumero(int numero) { //PREGUNTAR QUE ES? ES LO MISMO QUE FIND BY ID?
