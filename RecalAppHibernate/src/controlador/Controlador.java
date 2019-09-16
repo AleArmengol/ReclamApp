@@ -155,11 +155,15 @@ public class Controlador {
 	}
 	
 	public List<ReclamoView> reclamosPorUnidad(int codigo, String piso, String numero) {
-		List<ReclamoView> resultado = new ArrayList<ReclamoView>(); //TODO
-		return resultado;
+		List<ReclamoView> reclamosV = new ArrayList<ReclamoView>(); //TODO
+		List<Reclamo> reclamosN = ReclamoDAO.getInstance().getReclamosByUnidad(codigo);
+		for(Reclamo rn : reclamosN) {
+			reclamosV.add(rn.toView());
+		}
+		return reclamosV;
 	}
 	
-	public ReclamoView reclamosPorNumero(int numero) {
+	public ReclamoView reclamosPorNumero(int numero) { //PREGUNTAR QUE ES? ES LO MISMO QUE FIND BY ID?
 		ReclamoView resultado = null; //TODO
 		return resultado;
 	}
@@ -179,8 +183,8 @@ public class Controlador {
 	}
 	
 	public void agregarImagenAReclamo(int numero, String direccion, String tipo) throws ReclamoException {
-		Reclamo reclamo = buscarReclamo(numero); //TODO
-		reclamo.agregarImagen(direccion, tipo);
+		Reclamo reclamo = buscarReclamo(numero); 
+		reclamo.agregarImagen(direccion, tipo); //TODO
 	}
 	
 	public void cambiarEstado(int numero, Estado estado) throws ReclamoException { //TODO
@@ -202,6 +206,6 @@ public class Controlador {
 	}
 	
 	private Reclamo buscarReclamo(int numero) throws ReclamoException {
-		return null;
+		return ReclamoDAO.getInstance().findById(numero);
 	}
 }

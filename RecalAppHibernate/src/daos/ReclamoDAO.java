@@ -8,7 +8,11 @@ import org.hibernate.Session;
 import entities.EdificioEntity;
 import entities.PersonaEntity;
 import entities.ReclamoEntity;
+<<<<<<< HEAD
 import entities.UnidadEntity;
+=======
+import exceptions.ReclamoException;
+>>>>>>> bcfe01c3d87dc78078c73b2920cf6d03166c8cf4
 import hibernate.HibernateUtil;
 import modelo.Edificio;
 import modelo.Persona;
@@ -47,6 +51,31 @@ public class ReclamoDAO {
 		Unidad unidadN = UnidadDAO.getInstance().toNegocio(re.getUnidadE());
 		
 		return new Reclamo(personaN, edificioN, re.getUbicacion(), re.getDescripcion(), unidadN);
+	}
+
+	public Reclamo findById(int numero) throws ReclamoException{
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		ReclamoEntity reclamoE = (ReclamoEntity) s.createQuery("from ReclamoEntity re where re.idReclamo = ?").setInteger(0, numero).uniqueResult();
+		s.getTransaction().commit();
+		s.close();
+		if(reclamoE == null) {
+			throw new ReclamoException("No existe el Reclamo " + numero);
+		}
+		return toNegocio(reclamoE);
+	}
+
+	public List<Reclamo> getReclamosByUnidad(int codigo) {
+		List<Reclamo> reclamosN = new ArrayList<Reclamo>();
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		List<ReclamoEntity> reclamosE = s.createQuery("FROM ReclamoEntity re WHERE re.identificador = ?").list();
+		s.getTransaction().commit();
+		s.close();
+		for(ReclamoEntity re: reclamosE) {
+			reclamosN.add(toNegocio(re));
+		}
+		return reclamosN;
 	}
 
 }
