@@ -4,8 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import daos.ReclamoDAO;
+<<<<<<< HEAD
+=======
+import views.EdificioView;
+>>>>>>> 28be2186faa6c6b3249f50832ad19209445eeedb
 import views.Estado;
+import views.PersonaView;
 import views.ReclamoView;
+import views.UnidadView;
 
 public class Reclamo {
 
@@ -18,6 +24,7 @@ public class Reclamo {
 	private Estado estado;
 	private List<Imagen> imagenes;
 	
+
 	public Reclamo(Persona usuario, Edificio edificio, String ubicacion, String descripcion, Unidad unidad) {
 		this.usuario = usuario;
 		this.edificio = edificio;
@@ -25,7 +32,7 @@ public class Reclamo {
 		this.descripcion = descripcion;
 		this.unidad = unidad;
 		this.estado = Estado.nuevo;
-		imagenes = new ArrayList<Imagen>();
+		this.imagenes = new ArrayList<Imagen>();
 	}
 
 	public void agregarImagen(String direccion, String tipo) {
@@ -34,6 +41,10 @@ public class Reclamo {
 		imagen.save(numero);
 	}
 	
+	public void cambiarEstado(Estado estado) {
+		this.estado = estado;
+	}
+
 	public int getNumero() {
 		return numero;
 	}
@@ -46,32 +57,56 @@ public class Reclamo {
 		return usuario;
 	}
 
+	public void setUsuario(Persona usuario) {
+		this.usuario = usuario;
+	}
+
 	public Edificio getEdificio() {
 		return edificio;
 	}
 
-	public String getUbicación() {
+	public void setEdificio(Edificio edificio) {
+		this.edificio = edificio;
+	}
+
+	public String getUbicacion() {
 		return ubicacion;
+	}
+
+	public void setUbicacion(String ubicacion) {
+		this.ubicacion = ubicacion;
 	}
 
 	public String getDescripcion() {
 		return descripcion;
 	}
 
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 	public Unidad getUnidad() {
 		return unidad;
+	}
+
+	public void setUnidad(Unidad unidad) {
+		this.unidad = unidad;
 	}
 
 	public Estado getEstado() {
 		return estado;
 	}
-	
-	public List<Imagen> getImagenes(){
-		return this.imagenes;
-	}
-	
-	public void cambiarEstado(Estado estado) {
+
+	public void setEstado(Estado estado) {
 		this.estado = estado;
+	}
+
+	public List<Imagen> getImagenes() {
+		return imagenes;
+	}
+
+	public void setImagenes(List<Imagen> imagenes) {
+		this.imagenes = imagenes;
 	}
 
 	public void save() {
@@ -79,11 +114,14 @@ public class Reclamo {
 	}
 	
 	public void update() {
-		
+
 	}
 
 	public ReclamoView toView() {
-		// TODO Auto-generated method stub
-		return new ReclamoView();
+		PersonaView auxPersona = usuario.toView();
+		EdificioView auxEdificio = edificio.toView();
+		UnidadView auxUnidad = unidad.toView();
+		ImagenView auxImagen = 
+		return new ReclamoView(numero, auxPersona, auxEdificio, ubicacion, descripcion, auxUnidad, estado, imagenes);
 	}
 }

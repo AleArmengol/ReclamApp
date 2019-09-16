@@ -41,22 +41,6 @@ public class ReclamoDAO {
 		return reclamosN;
 	}
 	
-	public void save (Reclamo reclamo) {
-		ReclamoEntity aGuardar= toEntity(reclamo);
-		Session s =HibernateUtil.getSessionFactory().openSession();
-		s.beginTransaction();
-		s.save(aGuardar);
-		s.getTransaction().commit();
-		s.close();
-	}
-	
-	ReclamoEntity toEntity(Reclamo reclamo) {
-		PersonaEntity personaE = PersonaDAO.getInstance().toEntity(reclamo.getUsuario());
-		EdificioEntity edificioE = EdificioDAO.getInstance().toEntity(reclamo.getEdificio());
-		UnidadEntity UnidadE=UnidadDAO.getInstance().toEntity(reclamo.getUnidad());
-		return new ReclamoEntity(personaE, edificioE, reclamo.getUbicación(), reclamo.getDescripcion(),UnidadE);
-	}
-
 	private Reclamo toNegocio(ReclamoEntity re) {
 		Persona personaN = PersonaDAO.getInstance().toNegocio(re.getUsuarioE());
 		Edificio edificioN = EdificioDAO.getInstance().toNegocio(re.getEdificioE());
