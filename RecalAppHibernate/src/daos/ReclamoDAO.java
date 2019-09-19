@@ -64,12 +64,25 @@ public class ReclamoDAO {
 		}
 		return toNegocio(reclamoE);
 	}
+	
+	public List<Reclamo> getReclamosByDoc(String documento) {
+		List<Reclamo> reclamosN = new ArrayList<Reclamo>();
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		List<ReclamoEntity> reclamosE = s.createQuery("FROM ReclamoEntity re WHERE re.usuarioE.documento = ?").list();
+		s.getTransaction().commit();
+		s.close();
+		for (ReclamoEntity re : reclamosE){
+			reclamosN.add(toNegocio(re));
+		}
+		return reclamosN;
+	}
 
 	public List<Reclamo> getReclamosByUnidad(int codigo) {
 		List<Reclamo> reclamosN = new ArrayList<Reclamo>();
 		Session s = HibernateUtil.getSessionFactory().openSession();
 		s.beginTransaction();
-		List<ReclamoEntity> reclamosE = s.createQuery("FROM ReclamoEntity re WHERE re.identificador = ?").list();
+		List<ReclamoEntity> reclamosE = s.createQuery("FROM ReclamoEntity re WHERE re.UnidadE.identificador = ?").list();
 		s.getTransaction().commit();
 		s.close();
 		for(ReclamoEntity re: reclamosE) {
@@ -77,5 +90,5 @@ public class ReclamoDAO {
 		}
 		return reclamosN;
 	}
-
+	
 }

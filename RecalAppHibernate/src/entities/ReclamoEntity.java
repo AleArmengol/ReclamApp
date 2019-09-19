@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +30,10 @@ public class ReclamoEntity {
 	@JoinColumn(name="identificador")
 	private UnidadEntity unidadE;
 	
+	@OneToMany
+	@JoinColumn (name="idReclamo")
+	private ImagenEntity imagenE;
+	
 	@Column(name="Estado")
 	String estado;
 	
@@ -40,13 +45,22 @@ public class ReclamoEntity {
 	}
 	
 	public ReclamoEntity(PersonaEntity personaE, EdificioEntity edificioE2, String ubicación, String descripcion2,
-			UnidadEntity unidadE2) {
+			UnidadEntity unidadE2, ImagenEntity imagenE2) {
 		
 		this.usuarioE=personaE;
 		this.edificioE=edificioE2;
 		this.ubicacion=ubicación;
 		this.descripcion=descripcion2;
-		this.unidadE=unidadE2;		
+		this.unidadE=unidadE2;
+		this.imagenE = imagenE2;
+	}
+
+	public ImagenEntity getImagenE() {
+		return imagenE;
+	}
+
+	public void setImagenE(ImagenEntity imagenE) {
+		this.imagenE = imagenE;
 	}
 
 	public int getIdReclamo() {

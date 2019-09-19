@@ -33,4 +33,5 @@ public class Persona {
 		PersonaDAO.getInstance().delete(this);
 		
 	}	
+
 }
