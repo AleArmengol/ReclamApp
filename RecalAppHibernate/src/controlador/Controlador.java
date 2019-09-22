@@ -170,12 +170,21 @@ public class Controlador {
 	}
 	
 	public List<ReclamoView> reclamosPorPersona(String documento) {
+<<<<<<< HEAD
 		List<ReclamoView> resultado = new ArrayList<ReclamoView>();
 		List<Reclamo> reclamosN = ReclamoDAO.getInstance().getReclamosByPersona(documento);
 		for(Reclamo rn : reclamosN) {
 			resultado.add(rn.toView());
 		}
 		return resultado;
+=======
+		List<ReclamoView> resultado = new ArrayList<ReclamoView>(); 
+		List<Reclamo> reclamosN = ReclamoDAO.getInstance().getReclamosByDoc(documento);
+		for(Reclamo rn : reclamosN) {
+			reclamosV.add(rn.toView());
+		}
+		return reclamosV;
+>>>>>>> d3b550f607760f7ec2e5a6e6b753d16a1799679f
 	}
  
 	public int agregarReclamo(int codigo, String piso, String numero, String documento, String ubicación, String descripcion) throws EdificioException, UnidadException, PersonaException {
@@ -188,7 +197,7 @@ public class Controlador {
 	}
 	
 	public void agregarImagenAReclamo(int numero, String direccion, String tipo) throws ReclamoException {
-		Reclamo reclamo = buscarReclamo(numero); 
+		Reclamo reclamo = buscarReclamo(numero);
 		reclamo.agregarImagen(direccion, tipo); //TODO
 	}
 	

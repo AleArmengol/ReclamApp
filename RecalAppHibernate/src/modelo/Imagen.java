@@ -36,7 +36,7 @@ public class Imagen {
 	}
 
 	public void save(int numeroReclamo) {
-		
+		ImagenDAO.getInstance().save(this);
 	}
 
 }
