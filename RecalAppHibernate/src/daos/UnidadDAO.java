@@ -7,9 +7,11 @@ import org.hibernate.classic.Session;
 
 import entities.DuenioEntity;
 import entities.UnidadEntity;
+import entities.UnidadSoloYSobreCargada;
 import exceptions.UnidadException;
 import hibernate.HibernateUtil;
 import modelo.Edificio;
+import modelo.Persona;
 import modelo.Unidad;
 
 public class UnidadDAO {
@@ -68,13 +70,32 @@ public class UnidadDAO {
 
 	UnidadEntity toEntity(Unidad unidadN) {
 		String habitado;
+		List<Persona> dueniosPN = unidadN.getDuenios();
+		List<DuenioEntity> dueniosE = new ArrayList<DuenioEntity>();
+		for(Persona duenioPN: dueniosPN) {
+			dueniosE.add(DueniosDAO.getInstance().toEntity(duenioPN, unidadN));
+		}
 		if (unidadN.isHabitado()) {
 			habitado = "S";
 		} else {
 			habitado = "N";
 		}
-
-		return new UnidadEntity(unidadN.getNumero(), unidadN.getPiso(), habitado, unidadN.getId());
+		
+		UnidadEntity unidadE = new UnidadEntity(unidadN.getNumero(), unidadN.getPiso(), habitado, unidadN.getId());
+		unidadE.setDueniosE(dueniosE);
+		return unidadE;
+		
+	}
+	
+	UnidadEntity toEntity(UnidadSoloYSobreCargada unidadS) {
+		Unidad aux = (Unidad) unidadS;
+		String habitado2;
+		if (aux.isHabitado()) {
+			habitado2 = "S";
+		} else {
+			habitado2 = "N";
+		}
+		return new UnidadEntity(aux.getNumero(), aux.getPiso(), habitado2, aux.getId());
 	}
 
 	public void update(Unidad unidad) {
@@ -84,5 +105,15 @@ public class UnidadDAO {
 		s.update(unidadE);
 		s.getTransaction().commit();
 		s.close();
+	}
+
+	public Unidad getUnidadById(int identificador) {
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		UnidadEntity unidadE = (UnidadEntity) s.createQuery("From UnidadEntity ue where ue.identificador = ?").setInteger(0, identificador).uniqueResult();
+		s.getTransaction().commit();
+		s.close();
+		return toNegocio(unidadE);
+		
 	}
 }

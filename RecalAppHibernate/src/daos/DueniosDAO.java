@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import entities.DuenioEntity;
 import entities.PersonaEntity;
 import entities.UnidadEntity;
+import entities.UnidadSoloYSobreCargada;
 import hibernate.HibernateUtil;
 import modelo.Persona;
 import modelo.Unidad;
@@ -52,8 +53,38 @@ public class DueniosDAO {
 		s.close();
 	}
 	
+	public boolean isDuenio(String documento) {
+		Session s= HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		DuenioEntity duenioE= new DuenioEntity();
+		duenioE=(DuenioEntity) s.createQuery("FROM DuenioEntity de WHERE de.documento=?").setString(0,documento).uniqueResult();
+		s.getTransaction().commit();
+		s.close();
+		if(duenioE != null) {
+			return true;
+		} else {
+			return false;
+		}	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	Persona toNegocio(DuenioEntity duenioE) {
 		return new Persona(duenioE.getPersonaE().getDocumento(), duenioE.getPersonaE().getNombre());
+	}
+	
+	public DuenioEntity toEntity(Persona persona, Unidad unidad) {
+		PersonaEntity personaEntity = PersonaDAO.getInstance().toEntity(persona);
+		UnidadSoloYSobreCargada aux = (UnidadSoloYSobreCargada) unidad;
+		UnidadEntity unidadEntity = UnidadDAO.getInstance().toEntity(aux);
+		return new DuenioEntity(personaEntity, unidadEntity);
 	}
 	
 }

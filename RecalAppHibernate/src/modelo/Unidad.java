@@ -6,12 +6,17 @@ import java.util.List;
 import daos.DueniosDAO;
 import daos.InquilinosDAO;
 import daos.UnidadDAO;
+import entities.UnidadSoloYSobreCargada;
 import exceptions.UnidadException;
 import views.EdificioView;
 import views.UnidadView;
 
-public class Unidad {
+public class Unidad implements UnidadSoloYSobreCargada{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String piso;
 	private String numero;
@@ -46,7 +51,7 @@ public class Unidad {
 			inquilinos = new ArrayList<Persona>();
 			inquilinos.add(inquilino);
 			InquilinosDAO.getInstance().save(inquilino, this);
-			UnidadDAO.getInstance().update(this);
+			UnidadDAO.getInstance().update(this); //BUG TODO
 		}
 		else
 			throw new UnidadException("La unidad esta ocupada");
@@ -54,6 +59,7 @@ public class Unidad {
 
 	public void agregarInquilino(Persona inquilino) {
 		inquilinos.add(inquilino);
+		InquilinosDAO.getInstance().save(inquilino, this);
 	}
 	
 	public boolean estaHabitado() {
@@ -63,13 +69,17 @@ public class Unidad {
 	public void liberar() {
 		this.inquilinos = new ArrayList<Persona>();
 		this.habitado = false;
+		UnidadDAO.getInstance().update(this);
 	}
 	//si la lista de inquilinos esta vacia y la unidad esta habitada, quiere decir que el duenio la esta ocupando
 	public void habitar() throws UnidadException {
 		if(this.habitado)
 			throw new UnidadException("La unidad ya esta habitada");
-		else
+		else {
 			this.habitado = true;
+			UnidadDAO.getInstance().update(this);
+		}
+		
 	}
 	
 	public int getId() {

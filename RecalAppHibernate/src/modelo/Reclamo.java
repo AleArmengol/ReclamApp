@@ -114,6 +114,7 @@ public class Reclamo {
 	}
 	
 	public void update() {
+		ReclamoDAO.getInstance().update(this);
 
 	}
 
@@ -121,7 +122,7 @@ public class Reclamo {
 		PersonaView auxPersona = usuario.toView();
 		EdificioView auxEdificio = edificio.toView();
 		UnidadView auxUnidad = unidad.toView();
-		ImagenView auxImagen = 
+		//List<String> pathImagenes = this.get
 		return new ReclamoView(numero, auxPersona, auxEdificio, ubicacion, descripcion, auxUnidad, estado, imagenes);
 	}
 }

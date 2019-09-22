@@ -3,8 +3,10 @@ package daos;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 
+import entities.DuenioEntity;
 import entities.InquilinoEntity;
 import entities.PersonaEntity;
 import entities.UnidadEntity;
@@ -55,4 +57,46 @@ public class InquilinosDAO {
 		s.close();
 		
 	}
+
+	public void delete(String documento) {
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		InquilinoEntity inquilinoE = (InquilinoEntity) s.createQuery("from inquilinoEntity ie where ie.personaE.documento = ?").setString(0, documento).uniqueResult();
+		if(inquilinoE != null) {
+			s.delete(inquilinoE);
+		}
+		s.getTransaction().commit();
+		s.close();
+		
+	}
+
+	public Unidad getUnidadInquilino(String documento) {
+		UnidadEntity unidadE;
+		Unidad unidadN;
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		InquilinoEntity inquilinoE = (InquilinoEntity) s.createQuery("from inquilinoEntity ie where ie.personaE.documento = ?").setString(0, documento).uniqueResult();
+		if(inquilinoE != null) {
+			unidadE = inquilinoE.getUnidadE();
+			unidadN =  UnidadDAO.getInstance().toNegocio(unidadE);
+		} else {
+			unidadN = null;
+		}
+		return unidadN;
+		
+	}
+
+	public boolean isInquilino(String documento) {
+		Session s= HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		InquilinoEntity inquilinoE= new InquilinoEntity();
+		inquilinoE=(InquilinoEntity) s.createQuery("FROM InquilinoEntity de WHERE de.documento=?").setString(0,documento).uniqueResult();
+		s.getTransaction().commit();
+		s.close();
+		if(inquilinoE != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}	
 }

@@ -8,11 +8,8 @@ import org.hibernate.Session;
 import entities.EdificioEntity;
 import entities.PersonaEntity;
 import entities.ReclamoEntity;
-<<<<<<< HEAD
 import entities.UnidadEntity;
-=======
 import exceptions.ReclamoException;
->>>>>>> bcfe01c3d87dc78078c73b2920cf6d03166c8cf4
 import hibernate.HibernateUtil;
 import modelo.Edificio;
 import modelo.Persona;
@@ -36,7 +33,7 @@ public class ReclamoDAO {
 		List<Reclamo> reclamosN = new ArrayList<Reclamo>();
 		Session s = HibernateUtil.getSessionFactory().openSession();
 		s.beginTransaction();
-		List<ReclamoEntity> reclamosE = s.createQuery("FROM ReclamoEntity re WHERE re.codigo = ?").list();
+		List<ReclamoEntity> reclamosE = s.createQuery("FROM ReclamoEntity re WHERE re.codigo = ?").setInteger(0, codigo).list();
 		s.getTransaction().commit();
 		s.close();
 		for(ReclamoEntity re: reclamosE) {
@@ -69,13 +66,51 @@ public class ReclamoDAO {
 		List<Reclamo> reclamosN = new ArrayList<Reclamo>();
 		Session s = HibernateUtil.getSessionFactory().openSession();
 		s.beginTransaction();
-		List<ReclamoEntity> reclamosE = s.createQuery("FROM ReclamoEntity re WHERE re.identificador = ?").list();
+		List<ReclamoEntity> reclamosE = s.createQuery("FROM ReclamoEntity re WHERE re.identificador = ?").setInteger(0, codigo).list();
 		s.getTransaction().commit();
 		s.close();
 		for(ReclamoEntity re: reclamosE) {
 			reclamosN.add(toNegocio(re));
 		}
 		return reclamosN;
+	}
+
+	public void save (Reclamo reclamo) {
+		ReclamoEntity aGuardar= toEntity(reclamo);
+		Session s =HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		s.save(aGuardar);
+		s.getTransaction().commit();
+		s.close();
+	}
+
+	ReclamoEntity toEntity(Reclamo reclamo) {
+		PersonaEntity personaE = PersonaDAO.getInstance().toEntity(reclamo.getUsuario());
+		EdificioEntity edificioE = EdificioDAO.getInstance().toEntity(reclamo.getEdificio());
+		UnidadEntity UnidadE=UnidadDAO.getInstance().toEntity(reclamo.getUnidad());
+		return new ReclamoEntity(personaE, edificioE, reclamo.getUbicacion(), reclamo.getDescripcion(),UnidadE);
+	}
+
+	public List<Reclamo> getReclamosByPersona(String documento) {
+		List<Reclamo> reclamosN = new ArrayList<Reclamo>();
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		List<ReclamoEntity> reclamosE = s.createQuery("FROM ReclamoEntity re WHERE re.documento = ?").setString(0, documento).list();
+		s.getTransaction().commit();
+		s.close();
+		for(ReclamoEntity re: reclamosE) {
+			reclamosN.add(toNegocio(re));
+		}
+		return reclamosN;
+	}
+
+	public void update(Reclamo reclamo) {
+		ReclamoEntity toUpdate = toEntity(reclamo);
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		s.update(toUpdate);
+		s.getTransaction().commit();
+		s.close();
 	}
 
 }
