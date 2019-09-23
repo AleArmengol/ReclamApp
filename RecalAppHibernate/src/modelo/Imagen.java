@@ -1,13 +1,15 @@
 package modelo;
 
+import daos.ImagenDAO;
+
 public class Imagen {
 
 	private int numero;
-	private String direccion;
+	private String path;
 	private String tipo;
 	
-	public Imagen(String direccion, String tipo) {
-		this.direccion = direccion;
+	public Imagen(String path, String tipo) {
+		this.path = path;
 		this.tipo = tipo;
 	}
 
@@ -19,12 +21,12 @@ public class Imagen {
 		this.numero = numero;
 	}
 
-	public String getDireccion() {
-		return direccion;
+	public String getPath() {
+		return path;
 	}
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 	public String getTipo() {
@@ -36,7 +38,7 @@ public class Imagen {
 	}
 
 	public void save(int numeroReclamo) {
-		ImagenDAO.getInstance().save(this);
+		ImagenDAO.getInstance().save(this, numeroReclamo);
 	}
 
 }

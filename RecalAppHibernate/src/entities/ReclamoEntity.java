@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import views.Estado;
 
 @Entity
 @Table(name="reclamos")
@@ -32,7 +36,7 @@ public class ReclamoEntity {
 	
 	@OneToMany
 	@JoinColumn (name="idReclamo")
-	private ImagenEntity imagenE;
+	private List<ImagenEntity> imagenE;
 	
 	@Column(name="Estado")
 	String estado;
@@ -44,22 +48,22 @@ public class ReclamoEntity {
 		
 	}
 	
-	public ReclamoEntity(PersonaEntity personaE, EdificioEntity edificioE2, String ubicación, String descripcion2,
-			UnidadEntity unidadE2, ImagenEntity imagenE2) {
-		
+	public ReclamoEntity(int id, PersonaEntity personaE, EdificioEntity edificioE2, String ubicación, String descripcion2,
+			UnidadEntity unidadE2, String estado) {
+		this.idReclamo = id;
 		this.usuarioE=personaE;
 		this.edificioE=edificioE2;
 		this.ubicacion=ubicación;
 		this.descripcion=descripcion2;
 		this.unidadE=unidadE2;
-		this.imagenE = imagenE2;
+		this.estado = estado;
 	}
 
-	public ImagenEntity getImagenE() {
+	public List<ImagenEntity> getImagenE() {
 		return imagenE;
 	}
 
-	public void setImagenE(ImagenEntity imagenE) {
+	public void setImagenE(List<ImagenEntity> imagenE) {
 		this.imagenE = imagenE;
 	}
 
@@ -119,6 +123,28 @@ public class ReclamoEntity {
 		this.descripcion = descripcion;
 	}
 	
+	public Estado stringToEstado(String estado) {
+		Estado aux = null;
+		if (estado == "abierto") {
+			aux = Estado.abierto;
+			return aux;
+		} else if (estado == "anulado") {
+			aux = Estado.anulado;
+			return aux;
+		} else if (estado == "desestimado") {
+			aux = Estado.desestimado;
+			return aux;
+		} else if (estado == "en proceso") {
+			aux = Estado.enProceso;
+			return aux;
+		} else if (estado == "nuevo") {
+			aux = Estado.nuevo;
+			return aux;
+		} else {
+			aux = Estado.terminado;
+			return aux;
+		}
+	}
 	
 
 }

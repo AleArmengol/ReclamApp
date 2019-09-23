@@ -1,7 +1,12 @@
 package entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 
 @Entity
@@ -21,10 +26,9 @@ public class ImagenEntity {
 	
 	public ImagenEntity() {}
 	
-	public ImagenEntity(String path, String tipo, int num, ReclamoEntity reclamoE2) {
+	public ImagenEntity(String path, String tipo, ReclamoEntity reclamoE2) {
 		this.path = path;
 		this.tipo = tipo;
-		this.numero = num;
 		reclamoE = reclamoE2;
 	}
 	

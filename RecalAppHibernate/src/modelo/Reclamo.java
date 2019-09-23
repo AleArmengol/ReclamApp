@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import daos.ReclamoDAO;
-<<<<<<< HEAD
-=======
 import views.EdificioView;
->>>>>>> 28be2186faa6c6b3249f50832ad19209445eeedb
 import views.Estado;
 import views.PersonaView;
 import views.ReclamoView;
@@ -25,6 +22,17 @@ public class Reclamo {
 	private List<Imagen> imagenes;
 	
 
+	public Reclamo(int numero, Persona usuario, Edificio edificio, String ubicacion, String descripcion, Unidad unidad, Estado estado) {
+		this.numero = numero;
+		this.usuario = usuario;
+		this.edificio = edificio;
+		this.ubicacion = ubicacion;
+		this.descripcion = descripcion;
+		this.unidad = unidad;
+		this.estado = estado;
+		this.imagenes = new ArrayList<Imagen>();
+	}
+	
 	public Reclamo(Persona usuario, Edificio edificio, String ubicacion, String descripcion, Unidad unidad) {
 		this.usuario = usuario;
 		this.edificio = edificio;
@@ -35,8 +43,8 @@ public class Reclamo {
 		this.imagenes = new ArrayList<Imagen>();
 	}
 
-	public void agregarImagen(String direccion, String tipo) {
-		Imagen imagen = new Imagen(direccion, tipo);
+	public void agregarImagen(String path, String tipo) {
+		Imagen imagen = new Imagen(path, tipo);
 		imagenes.add(imagen);
 		imagen.save(numero);
 	}
@@ -117,12 +125,32 @@ public class Reclamo {
 		ReclamoDAO.getInstance().update(this);
 
 	}
+	
+	public String getEstadoToString() {
+		if(estado == Estado.abierto)
+			return "abierto";
+		else if(estado == Estado.anulado)
+			return "anulado";
+		else if(estado == Estado.desestimado)
+			return "desestimado";
+		else if(estado == Estado.enProceso)
+			return "en proceso";
+		else if(estado == Estado.nuevo)
+			return "nuevo";
+		else
+			return "terminado";
+	}
+	
 
 	public ReclamoView toView() {
 		PersonaView auxPersona = usuario.toView();
 		EdificioView auxEdificio = edificio.toView();
 		UnidadView auxUnidad = unidad.toView();
-		//List<String> pathImagenes = this.get
-		return new ReclamoView(numero, auxPersona, auxEdificio, ubicacion, descripcion, auxUnidad, estado, imagenes);
+		List<Imagen> imagenes = this.getImagenes();
+		List<String> pathImagenes = new ArrayList<String>();
+		for(Imagen im: imagenes) {
+			pathImagenes.add(im.getPath());
+		}
+		return new ReclamoView(numero, auxPersona, auxEdificio, ubicacion, descripcion, auxUnidad, estado, pathImagenes);
 	}
 }
