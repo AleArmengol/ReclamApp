@@ -137,12 +137,12 @@ public class Test {
 //		}
 		
 		//agregaImagen a un reclamo
-		try {
-			Controlador.getInstancia().agregarImagenAReclamo(1, "C:\\Users\\aearm\\Documents\\ReclamAppFTP\\idReclamo1.jpg", "jpg");
-		} catch (ReclamoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			Controlador.getInstancia().agregarImagenAReclamo(1, "C:\\Users\\aearm\\Documents\\ReclamAppFTP\\idReclamo1.jpg", "jpg");
+//		} catch (ReclamoException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		
 	}

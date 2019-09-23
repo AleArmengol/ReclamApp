@@ -11,7 +11,6 @@ import entities.UnidadSoloYSobreCargada;
 import exceptions.UnidadException;
 import hibernate.HibernateUtil;
 import modelo.Edificio;
-import modelo.Persona;
 import modelo.Unidad;
 
 public class UnidadDAO {
@@ -70,11 +69,7 @@ public class UnidadDAO {
 
 	UnidadEntity toEntity(Unidad unidadN) {
 		String habitado;
-		List<Persona> dueniosPN = unidadN.getDuenios();
-		List<DuenioEntity> dueniosE = new ArrayList<DuenioEntity>();
-		for(Persona duenioPN: dueniosPN) {
-			dueniosE.add(DueniosDAO.getInstance().toEntity(duenioPN, unidadN));
-		}
+		List<DuenioEntity> dueniosE = DueniosDAO.getInstance().getDueniosEntityByUnidad(unidadN.getId());
 		if (unidadN.isHabitado()) {
 			habitado = "S";
 		} else {

@@ -51,7 +51,7 @@ public class Unidad implements UnidadSoloYSobreCargada{
 			inquilinos = new ArrayList<Persona>();
 			inquilinos.add(inquilino);
 			InquilinosDAO.getInstance().save(inquilino, this);
-			UnidadDAO.getInstance().update(this); //BUG TODO
+			UnidadDAO.getInstance().update(this); //BUG 
 		}
 		else
 			throw new UnidadException("La unidad esta ocupada");

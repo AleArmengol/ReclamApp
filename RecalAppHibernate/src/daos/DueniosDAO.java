@@ -86,5 +86,14 @@ public class DueniosDAO {
 		UnidadEntity unidadEntity = UnidadDAO.getInstance().toEntity(aux);
 		return new DuenioEntity(personaEntity, unidadEntity);
 	}
+	public List<DuenioEntity> getDueniosEntityByUnidad(int id) {
+		List<DuenioEntity> dueniosE = new ArrayList<DuenioEntity>();
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		dueniosE = s.createQuery("FROM DuenioEntity de WHERE de.unidadE.identificador = ?").setInteger(0, id).list();
+		s.getTransaction().commit();
+		s.close();
+		return dueniosE;
+	}
 	
 }
