@@ -62,10 +62,11 @@ public class Edificio {
 
 	public Set<Persona> duenios() {
 		Set<Persona> resultado = new HashSet<Persona>();
+		unidades = getUnidades();
 		for(Unidad unidad : unidades) {
 			List<Persona> duenios = unidad.getDuenios();
 			for(Persona p : duenios)
-				duenios.add(p);
+				resultado.add(p);
 		}
 		return resultado;
 	}

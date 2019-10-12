@@ -8,6 +8,7 @@ import exceptions.EdificioException;
 import exceptions.PersonaException;
 import exceptions.ReclamoException;
 import exceptions.UnidadException;
+import views.PersonaView;
 import views.ReclamoView;
 
 public class Test {
@@ -143,6 +144,17 @@ public class Test {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+		
+		//
+		try {
+			List<PersonaView> duenios = Controlador.getInstancia().dueniosPorEdificio(1);
+			for(PersonaView d: duenios) {
+				System.out.println(d.getNombre());
+			}
+		} catch (EdificioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 	}
