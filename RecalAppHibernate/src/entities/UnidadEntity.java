@@ -40,15 +40,23 @@ public class UnidadEntity {
 	private String piso;
 	private String habitado;
 	
-	public UnidadEntity(String numero, String piso, String habitado, int id) {
+	public UnidadEntity(String numero, String piso, String habitado, int id, EdificioEntity edificioE) {
 		this.numero = numero;
 		this.piso = piso;
 		this.habitado = habitado;
-		this.identificador = id;	
+		this.identificador = id;
+		this.edificioE = edificioE;
 	}
 	
 	public UnidadEntity() {
 		
+	}
+
+	public UnidadEntity(String numero2, String piso2, String habitado2, int id) {
+		this.numero = numero2;
+		this.piso = piso2;
+		this.habitado = habitado2;
+		this.identificador = id;
 	}
 
 	public int getIdentificador() {

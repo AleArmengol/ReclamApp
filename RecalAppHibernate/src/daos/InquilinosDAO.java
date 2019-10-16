@@ -42,6 +42,16 @@ public class InquilinosDAO {
 		return inquilinosN;
 	}
 	
+	public List<InquilinoEntity> getInquilinosEntityByUnidad(int id) {
+		List<InquilinoEntity> inquilinosE = new ArrayList<InquilinoEntity>();
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		inquilinosE = s.createQuery("FROM InquilinoEntity de WHERE de.unidadE.identificador = ?").setInteger(0, id).list();
+		s.getTransaction().commit();
+		s.close();
+		return inquilinosE;
+	}
+	
 	Persona toNegocio(InquilinoEntity inquilinoE) {
 		return new Persona(inquilinoE.getPersonaE().getDocumento(), inquilinoE.getPersonaE().getDocumento());
 	}

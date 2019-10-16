@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import controlador.Controlador;
+import daos.UnidadDAO;
 import exceptions.EdificioException;
 import exceptions.PersonaException;
 import exceptions.ReclamoException;
@@ -62,11 +63,18 @@ public class Test {
 //		}
 		
 		//Alquila una unidad a una persona
+		try {
+			Controlador.getInstancia().alquilarUnidad(1, "10", "6", "DNI41614393");
+		} catch (UnidadException | PersonaException e) {
+			System.out.println(e.getMessage());
+		} //BUG
+		
 //		try {
-//			Controlador.getInstancia().alquilarUnidad(1, "10", "6", "DNI41614393");
-//		} catch (UnidadException | PersonaException e) {
-//			System.out.println(e.getMessage());
-//		} //BUG
+//			Controlador.getInstancia().habitarUnidad(1, "10", "6");
+//		} catch (UnidadException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		
 		//Genera un nuevo reclamo
@@ -146,15 +154,15 @@ public class Test {
 //		}
 		
 		//
-		try {
-			List<PersonaView> duenios = Controlador.getInstancia().dueniosPorEdificio(1);
-			for(PersonaView d: duenios) {
-				System.out.println(d.getNombre());
-			}
-		} catch (EdificioException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			List<PersonaView> duenios = Controlador.getInstancia().dueniosPorEdificio(1);
+//			for(PersonaView d: duenios) {
+//				System.out.println(d.getNombre());
+//			}
+//		} catch (EdificioException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		
 	}

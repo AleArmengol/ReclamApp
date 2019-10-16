@@ -114,7 +114,7 @@ public class Controlador {
 	public void alquilarUnidad(int codigo, String piso, String numero, String documento) throws UnidadException, PersonaException{
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
 		Persona persona = buscarPersona(documento);
-		unidad.alquilar(persona);
+		unidad.alquilar(persona); //BUG
 	}
 
 	public void agregarInquilinoUnidad(int codigo, String piso, String numero, String documento) throws UnidadException, PersonaException{
@@ -125,12 +125,12 @@ public class Controlador {
 
 	public void liberarUnidad(int codigo, String piso, String numero) throws UnidadException {
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
-		unidad.liberar();
+		unidad.liberar(); //BUG
 	}
 	
 	public void habitarUnidad(int codigo, String piso, String numero) throws UnidadException {
 		Unidad unidad = buscarUnidad(codigo, piso, numero);
-		unidad.habitar();
+		unidad.habitar(); //BUG
 	}
 	
 	public void agregarPersona(String documento, String nombre) {

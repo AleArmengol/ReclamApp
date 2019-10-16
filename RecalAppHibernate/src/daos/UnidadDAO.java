@@ -6,8 +6,11 @@ import java.util.List;
 import org.hibernate.classic.Session;
 
 import entities.DuenioEntity;
+import entities.EdificioEntity;
+import entities.InquilinoEntity;
 import entities.UnidadEntity;
 import entities.UnidadSoloYSobreCargada;
+import exceptions.EdificioException;
 import exceptions.UnidadException;
 import hibernate.HibernateUtil;
 import modelo.Edificio;
@@ -69,15 +72,33 @@ public class UnidadDAO {
 
 	UnidadEntity toEntity(Unidad unidadN) {
 		String habitado;
+		//Obtengo los edificios
+		EdificioEntity edificioE = null;
+		try {
+			Edificio edificio = EdificioDAO.getInstance().findById(unidadN.getEdificio().getCodigo());
+			edificioE = EdificioDAO.getInstance().toEntity(edificio);
+		} catch (EdificioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//Obtengo los duenios
 		List<DuenioEntity> dueniosE = DueniosDAO.getInstance().getDueniosEntityByUnidad(unidadN.getId());
+		
+		
 		if (unidadN.isHabitado()) {
 			habitado = "S";
 		} else {
 			habitado = "N";
 		}
 		
-		UnidadEntity unidadE = new UnidadEntity(unidadN.getNumero(), unidadN.getPiso(), habitado, unidadN.getId());
+		//Obtengo los inquilinos
+		List<InquilinoEntity> inquilinosE = InquilinosDAO.getInstance().getInquilinosEntityByUnidad(unidadN.getId());
+		
+		
+		UnidadEntity unidadE = new UnidadEntity(unidadN.getNumero(), unidadN.getPiso(), habitado, unidadN.getId(), edificioE);
 		unidadE.setDueniosE(dueniosE);
+		unidadE.setInquilinosE(inquilinosE);
 		return unidadE;
 		
 	}
@@ -96,7 +117,7 @@ public class UnidadDAO {
 	public void update(Unidad unidad) {
 		UnidadEntity unidadE = toEntity(unidad);
 		Session s = HibernateUtil.getSessionFactory().openSession();
-		s.beginTransaction(); //TODO resolver BUG
+		s.beginTransaction(); // resolver BUG
 		s.update(unidadE);
 		s.getTransaction().commit();
 		s.close();
