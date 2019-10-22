@@ -12,11 +12,13 @@ public class ReclamoView {
 	private UnidadView unidad;
 	private Estado estado;
 	private List<String> imagenes;
-	
-	public ReclamoView() {}
-	
-	public ReclamoView(int numero, PersonaView usuario, EdificioView edificio, String ubicacion, String descripcion, UnidadView unidad, Estado estado, List<String> imagenes) {
-	
+
+	public ReclamoView() {
+	}
+
+	public ReclamoView(int numero, PersonaView usuario, EdificioView edificio, String ubicacion, String descripcion,
+			UnidadView unidad, Estado estado, List<String> imagenes) {
+
 		this.numero = numero;
 		this.usuario = usuario;
 		this.edificio = edificio;

@@ -10,28 +10,27 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="duenios")
+@Table(name = "duenios")
 public class DuenioEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@ManyToOne
-	@JoinColumn(name="identificador")
+	@JoinColumn(name = "identificador")
 	private UnidadEntity unidadE;
 	@ManyToOne
-	@JoinColumn(name="documento")
+	@JoinColumn(name = "documento")
 	private PersonaEntity personaE;
-	
-	
+
 	public DuenioEntity() {
-		
+
 	}
-	
+
 	public DuenioEntity(PersonaEntity personaEntity, UnidadEntity unidadEntity) {
 		unidadE = unidadEntity;
-		personaE = personaEntity; 
+		personaE = personaEntity;
 	}
 
 	public UnidadEntity getUnidadE() {
@@ -57,10 +56,5 @@ public class DuenioEntity {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
-	
-	
-	
 
 }

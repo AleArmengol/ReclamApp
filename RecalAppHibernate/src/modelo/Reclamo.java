@@ -3,6 +3,7 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import daos.ImagenDAO;
 import daos.ReclamoDAO;
 import views.EdificioView;
 import views.Estado;
@@ -20,9 +21,10 @@ public class Reclamo {
 	private Unidad unidad;
 	private Estado estado;
 	private List<Imagen> imagenes;
-	
+	private static final String PATH_FTP = "C:\\Users\\aearm\\Documents\\ReclamAppFTP";
 
-	public Reclamo(int numero, Persona usuario, Edificio edificio, String ubicacion, String descripcion, Unidad unidad, Estado estado) {
+	public Reclamo(int numero, Persona usuario, Edificio edificio, String ubicacion, String descripcion, Unidad unidad,
+			Estado estado) {
 		this.numero = numero;
 		this.usuario = usuario;
 		this.edificio = edificio;
@@ -32,7 +34,7 @@ public class Reclamo {
 		this.estado = estado;
 		this.imagenes = new ArrayList<Imagen>();
 	}
-	
+
 	public Reclamo(Persona usuario, Edificio edificio, String ubicacion, String descripcion, Unidad unidad) {
 		this.usuario = usuario;
 		this.edificio = edificio;
@@ -43,12 +45,13 @@ public class Reclamo {
 		this.imagenes = new ArrayList<Imagen>();
 	}
 
-	public void agregarImagen(String path, String tipo) {
-		Imagen imagen = new Imagen(path, tipo);
+	public void agregarImagen(String nombre, String tipo) {
+		String pathImagen = PATH_FTP + "\\" + this.numero + "-" + nombre;
+		Imagen imagen = new Imagen(pathImagen, tipo);
 		imagenes.add(imagen);
 		imagen.save(numero);
 	}
-	
+
 	public void cambiarEstado(Estado estado) {
 		this.estado = estado;
 	}
@@ -110,6 +113,9 @@ public class Reclamo {
 	}
 
 	public List<Imagen> getImagenes() {
+		if (imagenes != null && imagenes.size() == 0) {
+			imagenes = ImagenDAO.getInstance().getImagenesByReclamo(this.numero);
+		}
 		return imagenes;
 	}
 
@@ -120,27 +126,26 @@ public class Reclamo {
 	public void save() {
 		ReclamoDAO.getInstance().save(this);
 	}
-	
+
 	public void update() {
 		ReclamoDAO.getInstance().update(this);
 
 	}
-	
+
 	public String getEstadoToString() {
-		if(estado == Estado.abierto)
+		if (estado == Estado.abierto)
 			return "abierto";
-		else if(estado == Estado.anulado)
+		else if (estado == Estado.anulado)
 			return "anulado";
-		else if(estado == Estado.desestimado)
+		else if (estado == Estado.desestimado)
 			return "desestimado";
-		else if(estado == Estado.enProceso)
+		else if (estado == Estado.enProceso)
 			return "en proceso";
-		else if(estado == Estado.nuevo)
+		else if (estado == Estado.nuevo)
 			return "nuevo";
 		else
 			return "terminado";
 	}
-	
 
 	public ReclamoView toView() {
 		PersonaView auxPersona = usuario.toView();
@@ -148,9 +153,10 @@ public class Reclamo {
 		UnidadView auxUnidad = unidad.toView();
 		List<Imagen> imagenes = this.getImagenes();
 		List<String> pathImagenes = new ArrayList<String>();
-		for(Imagen im: imagenes) {
+		for (Imagen im : imagenes) {
 			pathImagenes.add(im.getPath());
 		}
-		return new ReclamoView(numero, auxPersona, auxEdificio, ubicacion, descripcion, auxUnidad, estado, pathImagenes);
+		return new ReclamoView(numero, auxPersona, auxEdificio, ubicacion, descripcion, auxUnidad, estado,
+				pathImagenes);
 	}
 }

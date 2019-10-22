@@ -15,47 +15,47 @@ import javax.persistence.Table;
 import views.Estado;
 
 @Entity
-@Table(name="reclamos")
+@Table(name = "reclamos")
 public class ReclamoEntity {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idReclamo;
-	
+
 	@ManyToOne
-	@JoinColumn(name="documento")
+	@JoinColumn(name = "documento")
 	private PersonaEntity usuarioE;
-	
+
 	@ManyToOne
-	@JoinColumn(name="codigo")
+	@JoinColumn(name = "codigo")
 	private EdificioEntity edificioE;
-	
+
 	@ManyToOne
-	@JoinColumn(name="identificador")
+	@JoinColumn(name = "identificador")
 	private UnidadEntity unidadE;
-	
+
 	@OneToMany
-	@JoinColumn (name="idReclamo")
+	@JoinColumn(name = "idReclamo")
 	private List<ImagenEntity> imagenE;
-	
-	@Column(name="Estado")
+
+	@Column(name = "Estado")
 	String estado;
-	
+
 	String ubicacion;
 	String descripcion;
-	
+
 	public ReclamoEntity() {
-		
+
 	}
-	
-	public ReclamoEntity(int id, PersonaEntity personaE, EdificioEntity edificioE2, String ubicación, String descripcion2,
-			UnidadEntity unidadE2, String estado) {
+
+	public ReclamoEntity(int id, PersonaEntity personaE, EdificioEntity edificioE2, String ubicación,
+			String descripcion2, UnidadEntity unidadE2, String estado) {
 		this.idReclamo = id;
-		this.usuarioE=personaE;
-		this.edificioE=edificioE2;
-		this.ubicacion=ubicación;
-		this.descripcion=descripcion2;
-		this.unidadE=unidadE2;
+		this.usuarioE = personaE;
+		this.edificioE = edificioE2;
+		this.ubicacion = ubicación;
+		this.descripcion = descripcion2;
+		this.unidadE = unidadE2;
 		this.estado = estado;
 	}
 
@@ -122,7 +122,7 @@ public class ReclamoEntity {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
+
 	public Estado stringToEstado(String estado) {
 		Estado aux = null;
 		if (estado == "abierto") {
@@ -145,6 +145,5 @@ public class ReclamoEntity {
 			return aux;
 		}
 	}
-	
 
 }

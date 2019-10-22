@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import controlador.Controlador;
+import daos.ImagenDAO;
 import daos.UnidadDAO;
 import exceptions.EdificioException;
 import exceptions.PersonaException;
 import exceptions.ReclamoException;
 import exceptions.UnidadException;
+import modelo.Imagen;
 import views.PersonaView;
 import views.ReclamoView;
 
@@ -17,7 +19,7 @@ public class Test {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		//Trae todos los edificios
+		// Trae todos los edificios
 //		List<EdificioView> edificios = Controlador.getInstancia().getEdificios();
 //		for (EdificioView e : edificios) {
 //			System.out.println(e.getNombre());
@@ -53,31 +55,30 @@ public class Test {
 //		} catch (EdificioException e) {
 //			System.out.println(e.getMessage());
 //		}
-		
-		//Agrega una persona como duenio a una unidad
+
+		// Agrega una persona como duenio a una unidad
 //		try {
 //			Controlador.getInstancia().agregarDuenioUnidad(1, "10", "6", "DNI30616697");
 //		} catch (UnidadException | PersonaException e1) {
 //			
 //			System.out.println(e1.getMessage());
 //		}
-		
-		//Alquila una unidad a una persona
+
+		// Alquila una unidad a una persona
 		try {
 			Controlador.getInstancia().alquilarUnidad(1, "10", "6", "DNI41614393");
 		} catch (UnidadException | PersonaException e) {
 			System.out.println(e.getMessage());
-		} //BUG
-		
+		} // BUG
+
 //		try {
 //			Controlador.getInstancia().habitarUnidad(1, "10", "6");
 //		} catch (UnidadException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		
-		
-		//Genera un nuevo reclamo
+
+		// Genera un nuevo reclamo
 //		int codigo = 1;
 //		String piso = "3";
 //		String numero = "5";
@@ -90,9 +91,8 @@ public class Test {
 //			// TODO Auto-generated catch block
 //			e.getMessage();
 //		}
-		
-		
-		//Cambia el estado de un reclamo
+
+		// Cambia el estado de un reclamo
 //		Estado estado = Estado.abierto;
 //		try {
 //			Controlador.getInstancia().cambiarEstado(2, estado);
@@ -101,7 +101,7 @@ public class Test {
 //			e.getMessage();
 //		}
 
-		//Devuelve los reclamos por edificio
+		// Devuelve los reclamos por edificio
 //		List<ReclamoView> reclamosporEdif = new ArrayList<ReclamoView>();
 //		try {
 //			reclamosporEdif = Controlador.getInstancia().reclamosPorEdificio(1);
@@ -111,7 +111,7 @@ public class Test {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		
+
 //		Devuelve los reclamos por unidad
 //		List<ReclamoView> reclamosXunid = new ArrayList<ReclamoView>();
 //		try {
@@ -122,8 +122,8 @@ public class Test {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		
-		//Obtiene un reclamo dado un codigo
+
+		// Obtiene un reclamo dado un codigo
 //		ReclamoView reclamoV = null;
 //		try {
 //			reclamoV = Controlador.getInstancia().reclamosPorNumero(2);
@@ -132,7 +132,7 @@ public class Test {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		
+
 //		Devuelve los reclamos por persona
 //		List<ReclamoView> reclamosXpersona = new ArrayList<ReclamoView>();
 //		try {
@@ -144,15 +144,15 @@ public class Test {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		
-		//agregaImagen a un reclamo
+
+		// agregaImagen a un reclamo
 //		try {
 //			Controlador.getInstancia().agregarImagenAReclamo(1, "C:\\Users\\aearm\\Documents\\ReclamAppFTP\\idReclamo1.jpg", "jpg");
 //		} catch (ReclamoException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		
+
 		//
 //		try {
 //			List<PersonaView> duenios = Controlador.getInstancia().dueniosPorEdificio(1);
@@ -163,7 +163,28 @@ public class Test {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		
-		
+
+		// Transferir unidad
+//		try {
+//			Controlador.getInstancia().transferirUnidad(1, "10", "6", "DNI41614393");
+//		} catch (UnidadException | PersonaException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
+//		try {
+//			Controlador.getInstancia().agregarImagenAReclamo(1, "humedadPared.jpg", "jpg");
+//		} catch (ReclamoException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
+		try {
+			Controlador.getInstancia().eliminarPersona("DNI41065529");
+		} catch (PersonaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 }

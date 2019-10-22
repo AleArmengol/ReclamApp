@@ -8,30 +8,30 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="imagenes")
+@Table(name = "imagenes")
 
 public class ImagenEntity {
-	
-	//TODO anotaciones para ImagenEntity
-	
+
+	// TODO anotaciones para ImagenEntity
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int numero;
-	
+
 	@ManyToOne
-	@JoinColumn(name="idReclamo")
+	@JoinColumn(name = "idReclamo")
 	private ReclamoEntity reclamoE;
-	
-	public ImagenEntity() {}
-	
+
+	public ImagenEntity() {
+	}
+
 	public ImagenEntity(String path, String tipo, ReclamoEntity reclamoE2) {
 		this.path = path;
 		this.tipo = tipo;
 		reclamoE = reclamoE2;
 	}
-	
+
 	public int getNumero() {
 		return numero;
 	}
@@ -58,7 +58,5 @@ public class ImagenEntity {
 
 	private String path;
 	private String tipo;
-	
-
 
 }

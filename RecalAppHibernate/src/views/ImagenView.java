@@ -1,12 +1,13 @@
 package views;
 
 public class ImagenView {
-	
+
 	private int numero;
 	private String direccion;
 	private String tipo;
-	
-	public ImagenView() {}
+
+	public ImagenView() {
+	}
 
 	public ImagenView(int numero, String direccion, String tipo) {
 		this.numero = numero;

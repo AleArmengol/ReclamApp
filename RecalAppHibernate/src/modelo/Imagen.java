@@ -7,7 +7,7 @@ public class Imagen {
 	private int numero;
 	private String path;
 	private String tipo;
-	
+
 	public Imagen(String path, String tipo) {
 		this.path = path;
 		this.tipo = tipo;

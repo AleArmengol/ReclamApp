@@ -14,32 +14,30 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name ="unidades")
+@Table(name = "unidades")
 
 public class UnidadEntity {
-	
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int identificador;
-	
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name="identificador")
+
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "identificador")
 	private List<DuenioEntity> dueniosE;
-	
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name="identificador")
+
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "identificador")
 	private List<InquilinoEntity> inquilinosE;
-	
 
 	@ManyToOne
-	@JoinColumn(name="codigoEdificio")
+	@JoinColumn(name = "codigoEdificio")
 	private EdificioEntity edificioE;
-	
+
 	private String numero;
 	private String piso;
 	private String habitado;
-	
+
 	public UnidadEntity(String numero, String piso, String habitado, int id, EdificioEntity edificioE) {
 		this.numero = numero;
 		this.piso = piso;
@@ -47,9 +45,9 @@ public class UnidadEntity {
 		this.identificador = id;
 		this.edificioE = edificioE;
 	}
-	
+
 	public UnidadEntity() {
-		
+
 	}
 
 	public UnidadEntity(String numero2, String piso2, String habitado2, int id) {
@@ -98,11 +96,11 @@ public class UnidadEntity {
 	public void setEdificioE(EdificioEntity edificioE) {
 		this.edificioE = edificioE;
 	}
-	
+
 	public List<InquilinoEntity> getInquilinosE() {
 		return inquilinosE;
 	}
-	
+
 	public void setInquilinosE(List<InquilinoEntity> inquilinosE) {
 		this.inquilinosE = inquilinosE;
 	}
@@ -114,6 +112,5 @@ public class UnidadEntity {
 	public void setDueniosE(List<DuenioEntity> dueniosE) {
 		this.dueniosE = dueniosE;
 	}
-	
-	
+
 }

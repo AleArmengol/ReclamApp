@@ -72,7 +72,7 @@ public class UnidadDAO {
 
 	UnidadEntity toEntity(Unidad unidadN) {
 		String habitado;
-		//Obtengo los edificios
+		// Obtengo los edificios
 		EdificioEntity edificioE = null;
 		try {
 			Edificio edificio = EdificioDAO.getInstance().findById(unidadN.getEdificio().getCodigo());
@@ -81,28 +81,27 @@ public class UnidadDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//Obtengo los duenios
+
+		// Obtengo los duenios
 		List<DuenioEntity> dueniosE = DueniosDAO.getInstance().getDueniosEntityByUnidad(unidadN.getId());
-		
-		
+
 		if (unidadN.isHabitado()) {
 			habitado = "S";
 		} else {
 			habitado = "N";
 		}
-		
-		//Obtengo los inquilinos
+
+		// Obtengo los inquilinos
 		List<InquilinoEntity> inquilinosE = InquilinosDAO.getInstance().getInquilinosEntityByUnidad(unidadN.getId());
-		
-		
-		UnidadEntity unidadE = new UnidadEntity(unidadN.getNumero(), unidadN.getPiso(), habitado, unidadN.getId(), edificioE);
+
+		UnidadEntity unidadE = new UnidadEntity(unidadN.getNumero(), unidadN.getPiso(), habitado, unidadN.getId(),
+				edificioE);
 		unidadE.setDueniosE(dueniosE);
 		unidadE.setInquilinosE(inquilinosE);
 		return unidadE;
-		
+
 	}
-	
+
 	UnidadEntity toEntity(UnidadSoloYSobreCargada unidadS) {
 		Unidad aux = (Unidad) unidadS;
 		String habitado2;
@@ -117,7 +116,7 @@ public class UnidadDAO {
 	public void update(Unidad unidad) {
 		UnidadEntity unidadE = toEntity(unidad);
 		Session s = HibernateUtil.getSessionFactory().openSession();
-		s.beginTransaction(); // resolver BUG
+		s.beginTransaction();
 		s.update(unidadE);
 		s.getTransaction().commit();
 		s.close();
@@ -126,10 +125,11 @@ public class UnidadDAO {
 	public Unidad getUnidadById(int identificador) {
 		Session s = HibernateUtil.getSessionFactory().openSession();
 		s.beginTransaction();
-		UnidadEntity unidadE = (UnidadEntity) s.createQuery("From UnidadEntity ue where ue.identificador = ?").setInteger(0, identificador).uniqueResult();
+		UnidadEntity unidadE = (UnidadEntity) s.createQuery("From UnidadEntity ue where ue.identificador = ?")
+				.setInteger(0, identificador).uniqueResult();
 		s.getTransaction().commit();
 		s.close();
 		return toNegocio(unidadE);
-		
+
 	}
 }

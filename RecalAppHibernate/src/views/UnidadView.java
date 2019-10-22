@@ -7,8 +7,9 @@ public class UnidadView {
 	private String numero;
 	private boolean habitado;
 	private EdificioView edificio;
-	
-	public UnidadView() {}
+
+	public UnidadView() {
+	}
 
 	public UnidadView(int id, String piso, String numero, boolean habitado, EdificioView edificio) {
 		this.id = id;
@@ -57,7 +58,7 @@ public class UnidadView {
 	public void setEdificio(EdificioView edificio) {
 		this.edificio = edificio;
 	}
-	
+
 	public String toString() {
 		return piso + " " + numero;
 	}

@@ -37,8 +37,8 @@ public class ReclamoDAO {
 		List<Reclamo> reclamosN = new ArrayList<Reclamo>();
 		Session s = HibernateUtil.getSessionFactory().openSession();
 		s.beginTransaction();
-		List<ReclamoEntity> reclamosE = s.createQuery("FROM ReclamoEntity re WHERE re.edificioE.codigo = ?").setInteger(0, codigo)
-				.list();
+		List<ReclamoEntity> reclamosE = s.createQuery("FROM ReclamoEntity re WHERE re.edificioE.codigo = ?")
+				.setInteger(0, codigo).list();
 		s.getTransaction().commit();
 		s.close();
 		for (ReclamoEntity re : reclamosE) {
@@ -67,8 +67,6 @@ public class ReclamoDAO {
 		}
 		return toNegocio(reclamoE);
 	}
-
-
 
 	public List<Reclamo> getReclamosByPersona(String documento) {
 		List<Reclamo> reclamosN = new ArrayList<Reclamo>();
@@ -111,7 +109,8 @@ public class ReclamoDAO {
 		PersonaEntity personaE = PersonaDAO.getInstance().toEntity(reclamo.getUsuario());
 		EdificioEntity edificioE = EdificioDAO.getInstance().toEntity(reclamo.getEdificio());
 		UnidadEntity unidadE = UnidadDAO.getInstance().toEntity(reclamo.getUnidad());
-		return new ReclamoEntity(reclamo.getNumero(), personaE, edificioE, reclamo.getUbicacion(), reclamo.getDescripcion(), unidadE, reclamo.getEstadoToString());
+		return new ReclamoEntity(reclamo.getNumero(), personaE, edificioE, reclamo.getUbicacion(),
+				reclamo.getDescripcion(), unidadE, reclamo.getEstadoToString());
 	}
 
 	public void update(Reclamo reclamo) {
@@ -121,6 +120,18 @@ public class ReclamoDAO {
 		s.update(toUpdate);
 		s.getTransaction().commit();
 		s.close();
+	}
+
+	public int getNumeroReclamoRecienCreado(String documento, int codigo, String ubicación, String descripcion,
+			int id) {
+		ReclamoEntity reclamoE = null;
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		reclamoE = (ReclamoEntity) s.createQuery(
+				"FROM ReclamoEntity re WHERE re.usuarioE.documento = ? AND re.edificioE.codigo = ? AND re.ubicacion = ? AND re.descripcion = ? AND re.unidadE.identificador = ?")
+				.setString(0, documento).setInteger(1, codigo).setString(2, ubicación).setString(3, descripcion)
+				.setInteger(4, id); // error cannot be cast to entities.ReclamoEntity BUG
+		return reclamoE.getIdReclamo();
 	}
 
 }

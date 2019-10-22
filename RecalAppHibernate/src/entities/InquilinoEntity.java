@@ -16,17 +16,17 @@ public class InquilinoEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="identificador")
+	@JoinColumn(name = "identificador")
 	private UnidadEntity unidadE;
-	
+
 	@ManyToOne
-	@JoinColumn(name="documento")
+	@JoinColumn(name = "documento")
 	private PersonaEntity personaE;
-	
+
 	public InquilinoEntity() {
-		
+
 	}
 
 	public InquilinoEntity(PersonaEntity personaE2, UnidadEntity unidadE2) {
@@ -57,8 +57,5 @@ public class InquilinoEntity {
 	public void setPersonaE(PersonaEntity personaE) {
 		this.personaE = personaE;
 	}
-	
-	
-	
 
 }

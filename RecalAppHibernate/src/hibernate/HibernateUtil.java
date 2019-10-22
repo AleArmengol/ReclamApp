@@ -14,9 +14,8 @@ import entities.UnidadEntity;
 public class HibernateUtil {
 
 	private static final SessionFactory sessionFactory;
-	
-	static
-	{
+
+	static {
 		try {
 			AnnotationConfiguration config = new AnnotationConfiguration();
 			config.addAnnotatedClass(EdificioEntity.class);
@@ -27,13 +26,13 @@ public class HibernateUtil {
 			config.addAnnotatedClass(ReclamoEntity.class);
 			config.addAnnotatedClass(ImagenEntity.class);
 			sessionFactory = config.buildSessionFactory();
-		}
-		catch (Throwable ex) {
+		} catch (Throwable ex) {
 			System.err.println("Initial SessionFactory creation failed." + ex);
 			throw new ExceptionInInitializerError(ex);
 		}
-		
+
 	}
+
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}

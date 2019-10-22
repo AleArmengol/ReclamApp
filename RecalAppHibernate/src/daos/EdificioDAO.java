@@ -11,31 +11,32 @@ import hibernate.HibernateUtil;
 import modelo.Edificio;
 
 public class EdificioDAO {
-	
+
 	private static EdificioDAO instance;
+
 	private EdificioDAO() {
-		
+
 	}
-	
+
 	public static EdificioDAO getInstance() {
-		if(instance == null)
+		if (instance == null)
 			instance = new EdificioDAO();
 		return instance;
 	}
-	
-	public List<Edificio> getEdificios(){
+
+	public List<Edificio> getEdificios() {
 		List<Edificio> edificiosN = new ArrayList<Edificio>();
 		Session s = HibernateUtil.getSessionFactory().openSession();
 		s.beginTransaction();
 		List<EdificioEntity> edificiosE = s.createQuery("from EdificioEntity").list();
 		s.getTransaction().commit();
 		s.close();
-		for(EdificioEntity ee : edificiosE) {
+		for (EdificioEntity ee : edificiosE) {
 			edificiosN.add(toNegocio(ee));
 		}
 		return edificiosN;
 	}
-	
+
 	public Edificio findById(int codigo) throws EdificioException {
 		Session s = HibernateUtil.getSessionFactory().openSession();
 		s.beginTransaction();
@@ -43,18 +44,18 @@ public class EdificioDAO {
 				.setInteger(0, codigo).uniqueResult();
 		s.getTransaction().commit();
 		s.close();
-		if(edificioE == null) {
-			throw new EdificioException("No existe el Edificio " + codigo); 
+		if (edificioE == null) {
+			throw new EdificioException("No existe el Edificio " + codigo);
 		}
 		return toNegocio(edificioE);
 	}
-	
-	 Edificio toNegocio(EdificioEntity entity) {
-		return new Edificio(entity.getCodigo(),entity.getNombre(), entity.getDireccion());
+
+	Edificio toNegocio(EdificioEntity entity) {
+		return new Edificio(entity.getCodigo(), entity.getNombre(), entity.getDireccion());
 	}
 
 	EdificioEntity toEntity(Edificio edificio) {
-		return new EdificioEntity(edificio.getCodigo(),edificio.getNombre(),edificio.getDireccion());
-		
+		return new EdificioEntity(edificio.getCodigo(), edificio.getNombre(), edificio.getDireccion());
+
 	}
 }

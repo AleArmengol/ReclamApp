@@ -1,11 +1,12 @@
 package views;
 
 public class PersonaView {
-	
+
 	private String documento;
 	private String nombre;
-	
-	public PersonaView() {}
+
+	public PersonaView() {
+	}
 
 	public PersonaView(String documento, String nombre) {
 		this.documento = documento;
@@ -31,5 +32,5 @@ public class PersonaView {
 	public String toString() {
 		return documento + " " + nombre;
 	}
-	
+
 }

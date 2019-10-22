@@ -3,15 +3,17 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import controlador.Controlador;
 import daos.DueniosDAO;
 import daos.InquilinosDAO;
 import daos.UnidadDAO;
 import entities.UnidadSoloYSobreCargada;
+import exceptions.PersonaException;
 import exceptions.UnidadException;
 import views.EdificioView;
 import views.UnidadView;
 
-public class Unidad implements UnidadSoloYSobreCargada{
+public class Unidad implements UnidadSoloYSobreCargada {
 
 	/**
 	 * 
@@ -24,7 +26,7 @@ public class Unidad implements UnidadSoloYSobreCargada{
 	private Edificio edificio;
 	private List<Persona> duenios;
 	private List<Persona> inquilinos;
-	
+
 	public Unidad(int id, String piso, String numero, Edificio edificio) {
 		this.id = id;
 		this.piso = piso;
@@ -36,24 +38,25 @@ public class Unidad implements UnidadSoloYSobreCargada{
 	}
 
 	public void transferir(Persona nuevoDuenio) {
+		// estamos eliminando de la tabla duenios, todos los duenios de la unidad
+		DueniosDAO.getInstance().delete(this.id);
 		duenios = new ArrayList<Persona>();
-		duenios.add(nuevoDuenio);
+		this.agregarDuenio(nuevoDuenio);
 	}
-	
+
 	public void agregarDuenio(Persona duenio) {
 		duenios.add(duenio);
 		DueniosDAO.getInstance().save(duenio, this);
 	}
-	
+
 	public void alquilar(Persona inquilino) throws UnidadException {
-		if(!this.habitado) {
+		if (!this.habitado) {
 			this.habitado = true;
 			inquilinos = new ArrayList<Persona>();
 			inquilinos.add(inquilino);
 			InquilinosDAO.getInstance().save(inquilino, this);
-			UnidadDAO.getInstance().update(this); //BUG 
-		}
-		else
+			UnidadDAO.getInstance().update(this); // BUG
+		} else
 			throw new UnidadException("La unidad esta ocupada");
 	}
 
@@ -61,27 +64,30 @@ public class Unidad implements UnidadSoloYSobreCargada{
 		inquilinos.add(inquilino);
 		InquilinosDAO.getInstance().save(inquilino, this);
 	}
-	
+
 	public boolean estaHabitado() {
 		return habitado;
 	}
-	
+
 	public void liberar() {
 		this.inquilinos = new ArrayList<Persona>();
 		this.habitado = false;
-		UnidadDAO.getInstance().update(this); //BUG
+		UnidadDAO.getInstance().update(this);
+		InquilinosDAO.getInstance().deleteByUnidad(this.id);
 	}
-	//si la lista de inquilinos esta vacia y la unidad esta habitada, quiere decir que el duenio la esta ocupando
+
+	// si la lista de inquilinos esta vacia y la unidad esta habitada, quiere decir
+	// que el duenio la esta ocupando
 	public void habitar() throws UnidadException {
-		if(this.habitado)
+		if (this.habitado)
 			throw new UnidadException("La unidad ya esta habitada");
 		else {
 			this.habitado = true;
-			UnidadDAO.getInstance().update(this); //BUG
+			UnidadDAO.getInstance().update(this); // BUG
 		}
-		
+
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -94,7 +100,6 @@ public class Unidad implements UnidadSoloYSobreCargada{
 		return numero;
 	}
 
-	
 	public Edificio getEdificio() {
 		return edificio;
 	}
@@ -106,7 +111,6 @@ public class Unidad implements UnidadSoloYSobreCargada{
 	public List<Persona> getInquilinos() {
 		return InquilinosDAO.getInstance().getInquilinosByUnidad(this.id);
 	}
-	
 
 	public boolean isHabitado() {
 		return habitado;
