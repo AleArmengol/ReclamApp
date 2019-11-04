@@ -220,7 +220,7 @@ public class Controlador {
 		return UnidadDAO.getInstance().findUnidad(codigo, piso, numero);
 	}
 
-	private Persona buscarPersona(String documento) throws PersonaException {
+	public Persona buscarPersona(String documento) throws PersonaException {
 		return PersonaDAO.getInstance().findPersonaById(documento);
 	}
 

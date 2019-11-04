@@ -1,18 +1,7 @@
 package test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import controlador.Controlador;
-import daos.ImagenDAO;
-import daos.UnidadDAO;
-import exceptions.EdificioException;
-import exceptions.PersonaException;
-import exceptions.ReclamoException;
-import exceptions.UnidadException;
-import modelo.Imagen;
-import views.PersonaView;
-import views.ReclamoView;
+import daos.PersonaDAO;
+import modelo.Persona;
 
 public class Test {
 
@@ -65,11 +54,11 @@ public class Test {
 //		}
 
 		// Alquila una unidad a una persona
-		try {
-			Controlador.getInstancia().alquilarUnidad(1, "10", "6", "DNI41614393");
-		} catch (UnidadException | PersonaException e) {
-			System.out.println(e.getMessage());
-		} // BUG
+//		try {
+//			Controlador.getInstancia().alquilarUnidad(1, "10", "6", "DNI41614393");
+//		} catch (UnidadException | PersonaException e) {
+//			System.out.println(e.getMessage());
+//		}
 
 //		try {
 //			Controlador.getInstancia().habitarUnidad(1, "10", "6");
@@ -172,19 +161,25 @@ public class Test {
 //			e.printStackTrace();
 //		}
 
+		//Agrega imagen reclamo
 //		try {
 //			Controlador.getInstancia().agregarImagenAReclamo(1, "humedadPared.jpg", "jpg");
 //		} catch (ReclamoException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+		
+		//Busca persona
+		Persona p = PersonaDAO.getInstance().findPersonaById("DNI11223344");
+//		System.out.println(p);
 
-		try {
-			Controlador.getInstancia().eliminarPersona("DNI41065529");
-		} catch (PersonaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//Eliminar una persona
+//		try {
+//			Controlador.getInstancia().eliminarPersona("DNI41065529");
+//		} catch (PersonaException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 	}
 }

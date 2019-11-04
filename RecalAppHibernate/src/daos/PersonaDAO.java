@@ -26,10 +26,14 @@ public class PersonaDAO {
 		s.beginTransaction();
 		personaE = (PersonaEntity) s.createQuery("FROM PersonaEntity pe WHERE pe.documento = ?").setString(0, documento)
 				.uniqueResult();
-		Persona personaN = new Persona(personaE.getDocumento(), personaE.getNombre());
-		s.getTransaction().commit();
-		s.close();
-		return personaN;
+		if(personaE != null) {
+			Persona personaN = new Persona(personaE.getDocumento(), personaE.getNombre());
+			s.getTransaction().commit();
+			s.close();
+			return personaN;
+		} else {
+			return null;
+		}
 	}
 
 	public void save(Persona persona) {

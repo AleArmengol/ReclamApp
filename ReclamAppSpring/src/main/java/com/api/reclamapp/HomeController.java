@@ -315,6 +315,21 @@ public class HomeController {
 
 		Controlador.getInstancia().agregarImagenAReclamo(numero, nombreImagen, tipo);
 	}
+	
+	@RequestMapping(value = "/verificarUsuario", method = RequestMethod.GET)
+	public @ResponseBody <json> String verificarUsuario(@RequestParam(value = "documento", required = true) String documento) {
+		try {
+			if(Controlador.getInstancia().buscarPersona(documento) == null) {
+				return "false";
+			} else {
+				return "true";
+			}
+		} catch (PersonaException e) {
+			// TODO Auto-generated catch block
+			return "false";
+			
+		}
+	}
 
 	@RequestMapping(value = "/cambiarEstado", method = RequestMethod.PUT)
 	public @ResponseBody <json> void cambiarEstado(@RequestParam(value = "numero", required = true) int numero,
