@@ -102,6 +102,7 @@ public class ReclamoDAO {
 		s.beginTransaction();
 		s.save(aGuardar);
 		s.getTransaction().commit();
+		reclamo.setNumero(aGuardar.getIdReclamo());
 		s.close();
 	}
 
