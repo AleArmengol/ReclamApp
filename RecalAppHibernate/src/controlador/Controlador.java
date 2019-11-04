@@ -8,6 +8,7 @@ import daos.EdificioDAO;
 import daos.PersonaDAO;
 import daos.ReclamoDAO;
 import daos.UnidadDAO;
+import daos.UsuarioDAO;
 import exceptions.EdificioException;
 import exceptions.PersonaException;
 import exceptions.ReclamoException;
@@ -16,6 +17,7 @@ import modelo.Edificio;
 import modelo.Persona;
 import modelo.Reclamo;
 import modelo.Unidad;
+import modelo.Usuario;
 import views.EdificioView;
 import views.Estado;
 import views.PersonaView;
@@ -211,6 +213,27 @@ public class Controlador {
 		reclamo.cambiarEstado(estado);
 		reclamo.update();
 	}
+	
+	public Persona buscarPersona(String documento) throws PersonaException {
+		return PersonaDAO.getInstance().findPersonaById(documento);
+	}
+	
+	public boolean idUsuarioYaRegistrado(String idUsuario) {
+		if (UsuarioDAO.getInstance().findUsuarioById(idUsuario) != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean documentoYaRegistrado(String documento) {
+		if (UsuarioDAO.getInstance().findUsuarioByDocumento(documento) != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 
 	private Edificio buscarEdificio(int codigo) throws EdificioException {
 		return EdificioDAO.getInstance().findById(codigo);
@@ -220,9 +243,6 @@ public class Controlador {
 		return UnidadDAO.getInstance().findUnidad(codigo, piso, numero);
 	}
 
-	public Persona buscarPersona(String documento) throws PersonaException {
-		return PersonaDAO.getInstance().findPersonaById(documento);
-	}
 
 	private Reclamo buscarReclamo(int numero) throws ReclamoException {
 		return ReclamoDAO.getInstance().findById(numero);

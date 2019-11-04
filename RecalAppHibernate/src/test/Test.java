@@ -170,7 +170,7 @@ public class Test {
 //		}
 		
 		//Busca persona
-		Persona p = PersonaDAO.getInstance().findPersonaById("DNI11223344");
+//		Persona p = PersonaDAO.getInstance().findPersonaById("DNI11223344");
 //		System.out.println(p);
 
 		//Eliminar una persona

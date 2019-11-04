@@ -330,6 +330,25 @@ public class HomeController {
 			
 		}
 	}
+	
+	@RequestMapping(value = "/verificarIdUsuario", method = RequestMethod.GET)
+	public @ResponseBody <json> String verificarIdUsuario(@RequestParam(value = "idUsuario", required = true) String idUsuario) {
+		if(Controlador.getInstancia().idUsuarioYaRegistrado(idUsuario)) {
+			return "El nombre de usuario ya esta registrado";
+		} else {
+			return "Success";
+		}
+	}
+	
+	@RequestMapping(value = "/verificarDocumentoUsuario", method = RequestMethod.GET)
+	public @ResponseBody <json> String verificarDocumentoUsuario(@RequestParam(value = "documento", required = true) String documento) {
+		if(Controlador.getInstancia().idUsuarioYaRegistrado(documento)) {
+			return "El documento ya pertenece a una cuenta registrada";
+		} else {
+			return "Success";
+		}
+	}
+	
 
 	@RequestMapping(value = "/cambiarEstado", method = RequestMethod.PUT)
 	public @ResponseBody <json> void cambiarEstado(@RequestParam(value = "numero", required = true) int numero,

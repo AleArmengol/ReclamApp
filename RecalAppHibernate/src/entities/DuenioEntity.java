@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +24,9 @@ public class DuenioEntity {
 	@ManyToOne
 	@JoinColumn(name = "documento")
 	private PersonaEntity personaE;
+	
+	@OneToOne
+	private UsuarioEntity usuarioE;
 
 	public DuenioEntity() {
 
