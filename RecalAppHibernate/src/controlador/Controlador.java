@@ -1,8 +1,10 @@
 package controlador;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
 
 import daos.EdificioDAO;
 import daos.PersonaDAO;
@@ -54,6 +56,11 @@ public class Controlador {
 		for (Unidad unidad : unidades)
 			resultado.add(unidad.toView());
 		return resultado;
+	}
+	
+	public int getCodigoEdificioByNombre(String nombre) {
+		// TODO Auto-generated method stub
+		return EdificioDAO.getInstance().getCodigoByNombre(nombre);
 	}
 
 	public List<PersonaView> habilitadosPorEdificio(int codigo) throws EdificioException { // SP
@@ -189,6 +196,47 @@ public class Controlador {
 		}
 		return resultado;
 	}
+	
+	public Set<String> edificiosByPersona(String documento){
+		Set<String> nombreEdificios = new HashSet<String>();
+		List<EdificioView> resultado = new ArrayList<EdificioView>();
+		List<Edificio> edificiosDuenioN = UnidadDAO.getInstance().getEdificiosDuenio(documento);
+		for (Edificio rn: edificiosDuenioN) {
+			resultado.add(rn.toView());
+		}
+		List<Edificio> edificiosInquilinoN = UnidadDAO.getInstance().getEdificiosInquilino(documento);
+		for (Edificio rn: edificiosInquilinoN) {
+			if(!resultado.contains(rn.toView())) 
+				resultado.add(rn.toView());
+		}
+		for(EdificioView ev: resultado) {
+			nombreEdificios.add(ev.getNombre());
+		}
+		return nombreEdificios;
+	}
+	
+	public int agregarReclamoDentroUnidad(String nombre, String piso, String numero, String documento,
+			String descripcion) throws EdificioException, UnidadException, PersonaException {
+		// TODO Auto-generated method stub
+		int codigo = getCodigoEdificioByNombre(nombre);
+		Edificio edificio = buscarEdificio(codigo);
+		Unidad unidad = buscarUnidad(codigo, piso, numero);
+		Persona persona = buscarPersona(documento);
+		Reclamo reclamo = new Reclamo(persona, edificio, descripcion, unidad);
+		reclamo.save();
+		return reclamo.getNumero();
+	}
+	
+	public int agregarReclamoEspacioComun(String nombre, String documento,
+			String descripcion) throws EdificioException, UnidadException, PersonaException {
+		// TODO Auto-generated method stub
+		int codigo = getCodigoEdificioByNombre(nombre);
+		Edificio edificio = buscarEdificio(codigo);
+		Persona persona = buscarPersona(documento);
+		Reclamo reclamo = new Reclamo(persona, edificio, descripcion);
+		reclamo.save();
+		return reclamo.getNumero();
+	}
 
 	public int agregarReclamo(int codigo, String piso, String numero, String documento, String ubicación,
 			String descripcion) throws EdificioException, UnidadException, PersonaException {
@@ -247,4 +295,7 @@ public class Controlador {
 	private Reclamo buscarReclamo(int numero) throws ReclamoException {
 		return ReclamoDAO.getInstance().findById(numero);
 	}
+
+
+
 }

@@ -132,4 +132,27 @@ public class UnidadDAO {
 		return toNegocio(unidadE);
 
 	}
+
+	public List<Edificio> getEdificiosDuenio(String documento) {
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		List<Edificio> edificiosN = new ArrayList<Edificio>();
+		List<EdificioEntity> edificiosE = s.createQuery("SELECT DISTINCT x.edificioE from UnidadEntity x INNER JOIN x.dueniosE z WHERE z.personaE.documento = ?").setString(0, documento).list();
+		for(EdificioEntity ee: edificiosE) {
+			edificiosN.add(EdificioDAO.getInstance().toNegocio(ee));
+		}
+		return edificiosN;
+	}
+
+	public List<Edificio> getEdificiosInquilino(String documento) {
+		// TODO Auto-generated method stub
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		List<Edificio> edificiosN = new ArrayList<Edificio>();
+		List<EdificioEntity> edificiosE = s.createQuery("SELECT DISTINCT x.edificioE from UnidadEntity x INNER JOIN x.inquilinosE z WHERE z.personaE.documento = ?").setString(0, documento).list();
+		for(EdificioEntity ee: edificiosE) {
+			edificiosN.add(EdificioDAO.getInstance().toNegocio(ee));
+		}
+		return edificiosN;
+	}
 }

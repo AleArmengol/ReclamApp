@@ -107,9 +107,12 @@ public class ReclamoDAO {
 	}
 
 	ReclamoEntity toEntity(Reclamo reclamo) {
+		UnidadEntity unidadE = null;
 		PersonaEntity personaE = PersonaDAO.getInstance().toEntity(reclamo.getUsuario());
 		EdificioEntity edificioE = EdificioDAO.getInstance().toEntity(reclamo.getEdificio());
-		UnidadEntity unidadE = UnidadDAO.getInstance().toEntity(reclamo.getUnidad());
+		if(reclamo.getUnidad() != null) {
+			unidadE = UnidadDAO.getInstance().toEntity(reclamo.getUnidad());
+		}
 		return new ReclamoEntity(reclamo.getNumero(), personaE, edificioE, reclamo.getUbicacion(),
 				reclamo.getDescripcion(), unidadE, reclamo.getEstadoToString());
 	}

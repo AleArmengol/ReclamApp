@@ -1,7 +1,12 @@
 package test;
 
+import java.util.List;
+import java.util.Set;
+
+import controlador.Controlador;
 import daos.PersonaDAO;
 import modelo.Persona;
+import views.EdificioView;
 
 public class Test {
 
@@ -180,6 +185,11 @@ public class Test {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+		
+		Set<String> edificios = Controlador.getInstancia().edificiosByPersona("DNI29988738");
+		for(String ev : edificios) {
+			System.out.println(ev);
+		}
 
 	}
 }

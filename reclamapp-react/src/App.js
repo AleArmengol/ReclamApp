@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import AgregarReclamoPage from "./Pages/AgregarReclamoPage";
+import { Route, BrowserRouter as Router } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const routing = (
+  <Router>
+    <div>
+      <Route path="/agregarReclamo" component={AgregarReclamoPage} />
     </div>
-  );
+  </Router>
+);
+
+class App extends React.Component {
+  state = {
+    loading: true
+  };
+
+  componentDidMount() {
+    demoAsyncCall().then(() => this.setState({ loading: false }));
+  }
+
+  render() {
+    const { loading } = this.state;
+
+    if (loading) {
+      return <img alt="..."></img>; //Ver por que no esta llamando a la imagen de carga
+    } else {
+      return routing;
+    }
+  }
+}
+
+function demoAsyncCall() {
+  return new Promise(resolve => setTimeout(() => resolve(), 2500));
 }
 
 export default App;

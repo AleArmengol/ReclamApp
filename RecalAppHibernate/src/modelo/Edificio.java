@@ -8,7 +8,7 @@ import java.util.Set;
 import daos.UnidadDAO;
 import views.EdificioView;
 
-public class Edificio {
+public class Edificio implements Comparable<Edificio>{
 
 	private int codigo;
 	private String nombre;
@@ -87,8 +87,22 @@ public class Edificio {
 		}
 		return resultado;
 	}
+	
+	
+
+
+
 
 	public EdificioView toView() {
 		return new EdificioView(codigo, nombre, direccion);
+	}
+
+	@Override
+	public int compareTo(Edificio o) {
+		// TODO Auto-generated method stub
+		if( this.codigo == o.getCodigo())
+			return 0;
+		else
+			return 1;
 	}
 }

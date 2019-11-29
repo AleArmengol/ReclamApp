@@ -45,6 +45,26 @@ public class Reclamo {
 		this.imagenes = new ArrayList<Imagen>();
 	}
 
+	public Reclamo(Persona usuario, Edificio edificio2, String descripcion2, Unidad unidad2) {
+		this.usuario = usuario;
+		this.edificio = edificio2;
+		this.ubicacion = null;
+		this.descripcion = descripcion2;
+		this.unidad = unidad2;
+		this.estado = Estado.nuevo;
+		this.imagenes = new ArrayList<Imagen>();
+	}
+
+	public Reclamo(Persona usuario, Edificio edificio2, String descripcion2) {
+		this.usuario = usuario;
+		this.edificio = edificio2;
+		this.ubicacion = null;
+		this.descripcion = descripcion2;
+		this.unidad = null;
+		this.estado = Estado.nuevo;
+		this.imagenes = new ArrayList<Imagen>();
+	}
+
 	public void agregarImagen(String nombre, String tipo) {
 		String pathImagen = PATH_FTP + "\\" + this.numero + "-" + nombre;
 		Imagen imagen = new Imagen(pathImagen, tipo);

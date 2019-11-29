@@ -25,8 +25,8 @@ public class DuenioEntity {
 	@JoinColumn(name = "documento")
 	private PersonaEntity personaE;
 	
-	@OneToOne
-	private UsuarioEntity usuarioE;
+//	@OneToOne
+//	private UsuarioEntity usuarioE;
 
 	public DuenioEntity() {
 

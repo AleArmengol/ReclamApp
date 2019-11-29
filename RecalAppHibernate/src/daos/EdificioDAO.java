@@ -58,4 +58,12 @@ public class EdificioDAO {
 		return new EdificioEntity(edificio.getCodigo(), edificio.getNombre(), edificio.getDireccion());
 
 	}
+
+	public int getCodigoByNombre(String nombre) {
+		Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+		s.beginTransaction();
+		EdificioEntity edificioE = (EdificioEntity) s.createQuery("from EdificioEntity ee where ee.nombre = ?").setString(0, nombre).uniqueResult();
+		s.getTransaction().commit();
+		return edificioE.getCodigo();
+	}
 }

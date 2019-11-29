@@ -4,16 +4,17 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -31,6 +32,7 @@ import views.UnidadView;
 /**
  * Handles requests for the application home page.
  */
+
 @Controller
 public class HomeController {
 
@@ -39,6 +41,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
@@ -52,7 +55,8 @@ public class HomeController {
 
 		return "home";
 	}
-
+	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/getEdificios", method = RequestMethod.GET, produces = { "application/json" })
 	public @ResponseBody <json> String getEdificios() throws JsonProcessingException {
 		List<EdificioView> edificios = Controlador.getInstancia().getEdificios();
@@ -60,6 +64,7 @@ public class HomeController {
 		return mapper.writeValueAsString(edificios);
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/getUnidadesPorEdificio", method = RequestMethod.GET, produces = { "application/json" })
 	public @ResponseBody <json> String getUnidadesPorEdificio(
 			@RequestParam(value = "codigo", required = true) int codigo) throws JsonProcessingException {
@@ -71,7 +76,22 @@ public class HomeController {
 			return e.getMessage();
 		}
 	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/getUnidadesPorNombreEdificio", method = RequestMethod.GET, produces = { "application/json" })
+	public @ResponseBody <json> String getUnidadesPorNombreEdificio(
+			@RequestParam(value = "nombre", required = true) String nombre) throws JsonProcessingException {
+		try {
+			int codigo = Controlador.getInstancia().getCodigoEdificioByNombre(nombre);
+			List<UnidadView> unidades = Controlador.getInstancia().getUnidadesPorEdificio(codigo);
+			ObjectMapper mapper = new ObjectMapper();
+			return mapper.writeValueAsString(unidades);
+		} catch (EdificioException e) {
+			return e.getMessage();
+		}
+	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/getDueniosPorEdificio", method = RequestMethod.GET, produces = { "application/json" })
 	public @ResponseBody <json> String getDueniosPorEdificio(
 			@RequestParam(value = "codigo", required = true) int codigo) throws JsonProcessingException {
@@ -84,6 +104,7 @@ public class HomeController {
 		}
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/getHabilitadosPorEdificio", method = RequestMethod.GET, produces = { "application/json" })
 	public @ResponseBody <json> String getHabilidatosPorEdificio(
 			@RequestParam(value = "codigo", required = true) int codigo) throws JsonProcessingException {
@@ -96,6 +117,7 @@ public class HomeController {
 		}
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/getDueniosPorUnidad", method = RequestMethod.GET, produces = { "application/json" })
 	public @ResponseBody <json> String getDueniosPorUnidad(@RequestParam(value = "codigo", required = true) int codigo,
 			@RequestParam(value = "piso", required = true) String piso,
@@ -112,6 +134,7 @@ public class HomeController {
 		}
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/getInquilinosPorUnidad", method = RequestMethod.GET, produces = { "application/json" })
 	public @ResponseBody <json> String getInquilinosPorUnidad(
 			@RequestParam(value = "codigo", required = true) int codigo,
@@ -129,6 +152,7 @@ public class HomeController {
 		}
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/transferirUnidad", method = RequestMethod.PUT)
 	public @ResponseBody <json> void transferirUnidad(@RequestParam(value = "codigo", required = true) int codigo,
 			@RequestParam(value = "piso", required = true) String piso,
@@ -146,6 +170,7 @@ public class HomeController {
 
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/agregarDuenioUnidad", method = RequestMethod.POST)
 	public @ResponseBody <json> void agregarDuenioUnidad(@RequestParam(value = "codigo", required = true) int codigo,
 			@RequestParam(value = "piso", required = true) String piso,
@@ -163,6 +188,7 @@ public class HomeController {
 
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/alquilarUnidad", method = RequestMethod.POST)
 	public @ResponseBody <json> void alquilarUnidad(@RequestParam(value = "codigo", required = true) int codigo,
 			@RequestParam(value = "piso", required = true) String piso,
@@ -180,6 +206,7 @@ public class HomeController {
 
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/agregarInquilinoUnidad", method = RequestMethod.POST)
 	public @ResponseBody <json> void agregarInquilinoUnidad(@RequestParam(value = "codigo", required = true) int codigo,
 			@RequestParam(value = "piso", required = true) String piso,
@@ -197,6 +224,7 @@ public class HomeController {
 
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/liberarUnidad", method = RequestMethod.PUT)
 	public @ResponseBody <json> void liberarUnidad(@RequestParam(value = "codigo", required = true) int codigo,
 			@RequestParam(value = "piso", required = true) String piso,
@@ -210,6 +238,7 @@ public class HomeController {
 
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/habitarUnidad", method = RequestMethod.PUT)
 	public @ResponseBody <json> void habitarUnidad(@RequestParam(value = "codigo", required = true) int codigo,
 			@RequestParam(value = "piso", required = true) String piso,
@@ -221,6 +250,7 @@ public class HomeController {
 		}
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/agregarPersona", method = RequestMethod.POST)
 	public @ResponseBody <json> void agregarPersona(
 			@RequestParam(value = "documento", required = true) String documento,
@@ -228,6 +258,7 @@ public class HomeController {
 		Controlador.getInstancia().agregarPersona(documento, nombre);
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/eliminarPersona", method = RequestMethod.DELETE)
 	public @ResponseBody <json> void eliminarPersona(
 			@RequestParam(value = "documento", required = true) String documento) throws PersonaException {
@@ -238,6 +269,7 @@ public class HomeController {
 		}
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/reclamosPorEdificio", method = RequestMethod.GET, produces = { "application/json" })
 	public @ResponseBody <json> String reclamosPorEdificio(@RequestParam(value = "codigo", required = true) int codigo)
 			throws JsonProcessingException, EdificioException {
@@ -251,6 +283,7 @@ public class HomeController {
 		}
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/reclamosPorUnidad", method = RequestMethod.GET, produces = { "application/json" })
 	public @ResponseBody <json> String reclamosPorUnidad(@RequestParam(value = "codigo", required = true) int codigo,
 			@RequestParam(value = "piso", required = true) String piso,
@@ -266,6 +299,7 @@ public class HomeController {
 		}
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/reclamosPorNumero", method = RequestMethod.GET, produces = { "application/json" })
 	public @ResponseBody <json> String reclamosPorNumero(@RequestParam(value = "numero", required = true) int numero)
 			throws JsonProcessingException, ReclamoException {
@@ -279,6 +313,7 @@ public class HomeController {
 		}
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/reclamosPorPersona", method = RequestMethod.GET, produces = { "application/json" })
 	public @ResponseBody <json> String reclamosPorPersona(
 			@RequestParam(value = "documento", required = true) String documento)
@@ -292,7 +327,16 @@ public class HomeController {
 			return e.getMessage();
 		}
 	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/edificiosDePersona", method = RequestMethod.GET, produces = {"application/json"})
+	public @ResponseBody<json> String  edificiosPorPersona(@RequestParam(value = "documento", required = true)String documento)throws JsonProcessingException {
+		Set<String> nombreEdificios = Controlador.getInstancia().edificiosByPersona(documento);
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(nombreEdificios);
+	}
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/agregarReclamo", method = RequestMethod.POST, produces = { "application/json" })
 	public @ResponseBody <json> String agregarReclamo(@RequestParam(value = "codigo", required = true) int codigo,
 			@RequestParam(value = "piso", required = true) String piso,
@@ -307,7 +351,36 @@ public class HomeController {
 		String mensaje = "Tu reclamo se agrego correctamente. Tu numero de reclamo es: " + numeroReclamo;
 		return mensaje;
 	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/agregarReclamoDentroUnidad", method = RequestMethod.POST, produces = { "application/json" })
+	public @ResponseBody <json> String agregarReclamoDentroUnidad(@RequestParam(value = "nombre", required = true) String nombre,
+			@RequestParam(value = "piso", required = true) String piso,
+			@RequestParam(value = "numero", required = true) String numero,
+			@RequestParam(value = "documento", required = true) String documento,
+			@RequestParam(value = "descripcion", required = true) String descripcion)
+			throws EdificioException, UnidadException, PersonaException {
 
+		int numeroReclamo = Controlador.getInstancia().agregarReclamoDentroUnidad(nombre, piso, numero, documento,
+				descripcion);
+		String mensaje = "Tu reclamo se agrego correctamente. Tu numero de reclamo es: " + numeroReclamo;
+		return mensaje;
+	}
+	
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/agregarReclamoEspacioComun", method = RequestMethod.POST, produces = { "application/json" })
+	public @ResponseBody <json> String agregarReclamoEspacioComun(@RequestParam(value = "nombre", required = true) String nombre,
+			@RequestParam(value = "documento", required = true) String documento,
+			@RequestParam(value = "descripcion", required = true) String descripcion)
+			throws EdificioException, UnidadException, PersonaException {
+
+		int numeroReclamo = Controlador.getInstancia().agregarReclamoEspacioComun(nombre, documento, descripcion);
+		String mensaje = "Tu reclamo se agrego correctamente. Tu numero de reclamo es: " + numeroReclamo;
+		return mensaje;
+	}
+
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/agregarImagenAReclamo", method = RequestMethod.POST)
 	public @ResponseBody <json> void agregarImagenAReclamo(@RequestParam(value = "numero", required = true) int numero,
 			@RequestParam(value = "nombreImagen", required = true) String nombreImagen,
@@ -316,6 +389,7 @@ public class HomeController {
 		Controlador.getInstancia().agregarImagenAReclamo(numero, nombreImagen, tipo);
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/verificarUsuario", method = RequestMethod.GET)
 	public @ResponseBody <json> String verificarUsuario(@RequestParam(value = "documento", required = true) String documento) {
 		try {
@@ -331,6 +405,7 @@ public class HomeController {
 		}
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/verificarIdUsuario", method = RequestMethod.GET)
 	public @ResponseBody <json> String verificarIdUsuario(@RequestParam(value = "idUsuario", required = true) String idUsuario) {
 		if(Controlador.getInstancia().idUsuarioYaRegistrado(idUsuario)) {
@@ -340,6 +415,7 @@ public class HomeController {
 		}
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/verificarDocumentoUsuario", method = RequestMethod.GET)
 	public @ResponseBody <json> String verificarDocumentoUsuario(@RequestParam(value = "documento", required = true) String documento) {
 		if(Controlador.getInstancia().idUsuarioYaRegistrado(documento)) {
@@ -349,7 +425,7 @@ public class HomeController {
 		}
 	}
 	
-
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/cambiarEstado", method = RequestMethod.PUT)
 	public @ResponseBody <json> void cambiarEstado(@RequestParam(value = "numero", required = true) int numero,
 			@RequestParam(value = "estado", required = true) String estado) throws ReclamoException {

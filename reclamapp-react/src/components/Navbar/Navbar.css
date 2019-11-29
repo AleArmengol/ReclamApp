@@ -1,0 +1,12 @@
+.navbar-style {
+  background-color: #53596f;
+}
+
+.navbar-light .navbar-text {
+  color: #fff;
+}
+
+.nav-link {
+  color: #fff;
+  padding-left: 30px;
+}
