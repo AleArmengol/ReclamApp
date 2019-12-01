@@ -16,6 +16,7 @@ const routing = (
       <Route path="/MisEdificios" component={MisEdificiosPage} />
       <Route path="/MisReclamos" component={MisReclamosPage} />
       <Route path="/ReclamosEdificio" component={ReclamosEdificioPage} />
+      <Route path="/ReclamosAdmin" component={ReclamosAdminPage} />
     </div>
   </Router>
 );
