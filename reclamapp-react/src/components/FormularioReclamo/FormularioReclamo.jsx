@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, DropdownButton, FormGroup, Button } from "react-bootstrap";
 import DropdownItem from "react-bootstrap/DropdownItem";
+import Modal from "react-bootstrap/Modal";
 
 class FormularioReclamo extends Component {
   constructor(props) {
@@ -17,7 +18,9 @@ class FormularioReclamo extends Component {
       unidades: [],
       piso: "",
       numero: "",
-      descripcion: ""
+      descripcion: "",
+      popup: "",
+      seAgregoReclamo: false
     };
   }
 
@@ -74,7 +77,6 @@ class FormularioReclamo extends Component {
     });
     if (this.state.seleccionoEdificio && this.state.seleccionoLugar) {
       if (this.state.dentroUnidad) {
-        console.log("ENTRA A AGREGAR RECLAMO");
         var url =
           "http://localhost:8080/reclamapp/agregarReclamoDentroUnidad?nombre=" +
           this.state.edificioSeleccionado +
@@ -96,11 +98,17 @@ class FormularioReclamo extends Component {
             // 'Content-Type': 'application/x-www-form-urlencoded',
           }
         })
-          .then(response => console.log(response))
-          .then(res => console.log(res));
+          .then(response => {
+            return response.text();
+          })
+          .then(data => {
+            this.setState({
+              popup: data,
+              seAgregoReclamo: true
+            });
+          });
       } else {
         //http://localhost:8080/reclamapp/agregarReclamoEspacioComun?nombre=Alvear Tower&documento=DNI41893184&descripcion=No funciona el elevador al piso 3
-        console.log("Ento al agregar reclamo de espacio comun");
         var url2 =
           "http://localhost:8080/reclamapp/agregarReclamoEspacioComun?nombre=" +
           this.state.edificioSeleccionado +
@@ -118,8 +126,15 @@ class FormularioReclamo extends Component {
             // 'Content-Type': 'application/x-www-form-urlencoded',
           }
         })
-          .then(response => console.log(response))
-          .then(res => console.log(res));
+          .then(response => {
+            return response.text();
+          })
+          .then(data => {
+            this.setState({
+              popup: data,
+              seAgregoReclamo: true
+            });
+          });
       }
     }
   }
@@ -137,7 +152,7 @@ class FormularioReclamo extends Component {
   };
 
   handleSelectDonde = (eventKey, event) => {
-    eventKey = parseInt(eventKey);
+    eventKey = parseInt(eventKey); //convierte eventKey(Que es un string) a un int
     this.setState({
       dondeOcurrio: this.state.lugares[eventKey],
       seleccionoLugar: true,
@@ -145,10 +160,35 @@ class FormularioReclamo extends Component {
     });
   };
 
+  handleClosePopUp = (eventKey, event) => {
+    this.setState({
+      popup: "",
+      seAgregoReclamo: false
+    });
+  };
+
   render() {
     var dentroUnidad = this.state.dentroUnidad;
     //console.log(dentroUnidad);
+    console.log("state popup: " + this.state.popup);
+    console.log("Se agrego reclamo: " + this.state.seAgregoReclamo);
     var mostrar;
+    var popup;
+    if (this.state.seAgregoReclamo) {
+      popup = (
+        <Modal show={true} onHide={this.handleClosePopUp}>
+          <Modal.Header closeButton>
+            <Modal.Title>Reclamo Enviado</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{this.state.popup}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={this.handleClosePopUp}>
+              Entendido!
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      );
+    }
     if (dentroUnidad) {
       mostrar = (
         <div>
@@ -199,44 +239,47 @@ class FormularioReclamo extends Component {
     }
 
     return (
-      <Form>
-        <h1></h1>
-        <DropdownButton
-          title={this.state.dondeOcurrio}
-          onSelect={this.handleSelectDonde}
-        >
-          <DropdownItem key={0} eventKey={0}>
-            Espacio Comun del Edificio
-          </DropdownItem>
-          <DropdownItem key={1} eventKey={1}>
-            Dentro de la Unidad
-          </DropdownItem>
-        </DropdownButton>
-        <h1></h1>
+      <div>
+        <Form>
+          <h1></h1>
+          <DropdownButton
+            title={this.state.dondeOcurrio}
+            onSelect={this.handleSelectDonde}
+          >
+            <DropdownItem key={0} eventKey={0}>
+              Espacio Comun del Edificio
+            </DropdownItem>
+            <DropdownItem key={1} eventKey={1}>
+              Dentro de la Unidad
+            </DropdownItem>
+          </DropdownButton>
+          <h1></h1>
 
-        {this.state.seleccionoLugar ? (
-          <div>
-            <DropdownButton
-              title={this.state.edificioSeleccionado}
-              onSelect={this.handleSelectEdificio.bind(this)}
-            >
-              {this.state.nombreEdificios.map((nombreEdificio, i) => (
-                <DropdownItem key={i} eventKey={i}>
-                  {nombreEdificio}
-                </DropdownItem>
-              ))}
-            </DropdownButton>
-            {mostrar}
+          {this.state.seleccionoLugar ? (
             <div>
-              <Button onClick={this.agregarReclamo.bind(this)}>
-                Subir Reclamo
-              </Button>
+              <DropdownButton
+                title={this.state.edificioSeleccionado}
+                onSelect={this.handleSelectEdificio.bind(this)}
+              >
+                {this.state.nombreEdificios.map((nombreEdificio, i) => (
+                  <DropdownItem key={i} eventKey={i}>
+                    {nombreEdificio}
+                  </DropdownItem>
+                ))}
+              </DropdownButton>
+              {mostrar}
+              <div>
+                <Button onClick={this.agregarReclamo.bind(this)}>
+                  Subir Reclamo
+                </Button>
+              </div>
             </div>
-          </div>
-        ) : (
-          console.log("nada2")
-        )}
-      </Form>
+          ) : (
+            console.log("nada2")
+          )}
+        </Form>
+        {popup}
+      </div>
     );
   }
 }
