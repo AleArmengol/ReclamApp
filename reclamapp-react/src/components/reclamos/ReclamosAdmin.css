@@ -1,0 +1,15 @@
+.label{
+    position: absolute;
+    width: 786px;
+    height: 98px;
+    left: 0px;
+    top: 113px;
+    
+    font-family: Arbutus Slab;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 64px;
+    line-height: 80px;
+    
+    color: #FFFFFF;
+}

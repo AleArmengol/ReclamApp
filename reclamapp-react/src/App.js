@@ -10,6 +10,7 @@ const routing = (
     <div>
       <Route exact path="/" component={PrincipalPage} />
       <Route path="/agregarReclamo" component={AgregarReclamoPage} />
+      <Route path="/ReclamosAdmin" component={ReclamosAdminPage} />
       
     </div>
   </Router>
