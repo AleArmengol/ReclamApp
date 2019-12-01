@@ -23,6 +23,7 @@ import exceptions.EdificioException;
 import exceptions.PersonaException;
 import exceptions.ReclamoException;
 import exceptions.UnidadException;
+import modelo.Usuario;
 import views.EdificioView;
 import views.Estado;
 import views.PersonaView;
@@ -406,6 +407,21 @@ public class HomeController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/registrarUsuario", method = RequestMethod.POST)
+	public @ResponseBody <json> String registrarUsuario(
+			@RequestParam(value = "idUsuario", required = true) String idUsuario,
+			@RequestParam(value = "documento", required = true) String documento,
+			@RequestParam(value = "password", required = true) String password) {
+		Usuario usuario = null;
+		usuario = Controlador.getInstancia().registrarUsuario(idUsuario, documento, password);
+		if(usuario != null) {
+			return "Success";
+		} else {
+			return "Error al Registrar Usuario";
+		}
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/verificarIdUsuario", method = RequestMethod.GET)
 	public @ResponseBody <json> String verificarIdUsuario(@RequestParam(value = "idUsuario", required = true) String idUsuario) {
 		if(Controlador.getInstancia().idUsuarioYaRegistrado(idUsuario)) {
@@ -416,9 +432,26 @@ public class HomeController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/logInUsuario", method = RequestMethod.GET)
+	public @ResponseBody <json> String logInUsuario(@RequestParam(value = "idUsuario", required = true) String idUsuario, @RequestParam(value= "password", required = true)String password) {
+		Usuario usuario = Controlador.getInstancia().logInUsuario(idUsuario, password);
+		if(usuario != null) {
+			ObjectMapper mapper = new ObjectMapper();
+			try {
+				return mapper.writeValueAsString(usuario);
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				return "Error";
+			}
+		} else {
+			return "Error";
+		}
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/verificarDocumentoUsuario", method = RequestMethod.GET)
 	public @ResponseBody <json> String verificarDocumentoUsuario(@RequestParam(value = "documento", required = true) String documento) {
-		if(Controlador.getInstancia().idUsuarioYaRegistrado(documento)) {
+		if(Controlador.getInstancia().documentoYaRegistrado(documento)) {
 			return "El documento ya pertenece a una cuenta registrada";
 		} else {
 			return "Success";

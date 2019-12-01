@@ -154,6 +154,13 @@ public class Controlador {
 		Persona persona = new Persona(documento, nombre);
 		persona.save();
 	}
+	
+	public Usuario registrarUsuario(String idUsuario, String documento, String password) {
+		Usuario usuario = new Usuario(idUsuario, password, documento);
+		usuario.save();
+		return usuario;
+		
+	}
 
 	public void eliminarPersona(String documento) throws PersonaException { // SP
 		Persona persona = buscarPersona(documento);
@@ -295,6 +302,12 @@ public class Controlador {
 	private Reclamo buscarReclamo(int numero) throws ReclamoException {
 		return ReclamoDAO.getInstance().findById(numero);
 	}
+
+	public Usuario logInUsuario(String idUsuario, String password) {
+		return UsuarioDAO.getInstance().logIn(idUsuario, password);
+	}
+
+
 
 
 

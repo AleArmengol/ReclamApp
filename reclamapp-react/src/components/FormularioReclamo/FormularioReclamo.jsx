@@ -25,7 +25,6 @@ class FormularioReclamo extends Component {
   }
 
   componentDidMount() {
-    sessionStorage.setItem("documento", "DNI29988738");
     fetch(
       "http://localhost:8080/reclamapp/edificiosDePersona?documento=" +
         sessionStorage.getItem("documento"),

@@ -1,5 +1,7 @@
 package modelo;
 
+import daos.UsuarioDAO;
+
 public class Usuario {
 	
 	private String idUsuario;
@@ -28,6 +30,10 @@ public class Usuario {
 	}
 	public void setDocumento(String documento) {
 		this.documento = documento;
+	}
+	public void save() {
+		UsuarioDAO.getInstance().save(this);
+		
 	}
 	
 

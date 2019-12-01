@@ -2,8 +2,11 @@ package daos;
 
 import org.hibernate.Session;
 
+import controlador.Controlador;
+import entities.PersonaEntity;
 import entities.UsuarioEntity;
 import hibernate.HibernateUtil;
+import modelo.Persona;
 import modelo.Usuario;
 
 public class UsuarioDAO {
@@ -49,6 +52,27 @@ public class UsuarioDAO {
 			
 		} else {
 			return null;
+		}
+	}
+
+	public void save(Usuario usuario) {
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		PersonaEntity personaE = (PersonaEntity) s.createQuery("From PersonaEntity pe WHERE pe.documento = ?").setString(0, usuario.getDocumento()).uniqueResult();
+		UsuarioEntity toSave = new UsuarioEntity(usuario.getIdUsuario(), personaE, usuario.getClave());
+		s.save(toSave);
+		s.getTransaction().commit();
+		}
+
+	public Usuario logIn(String idUsuario, String password) {
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		UsuarioEntity usuarioE = null;
+		usuarioE = (UsuarioEntity) s.createQuery("From UsuarioEntity ue WHERE ue.idUsuario = ? AND ue.clave = ?").setString(0, idUsuario).setString(1, password).uniqueResult();
+		if(usuarioE == null) {
+			return null;
+		} else {
+			return new Usuario(usuarioE.getIdUsuario(), usuarioE.getClave(), usuarioE.getPersonaE().getDocumento());
 		}
 	}
 

@@ -7,9 +7,9 @@ class NavBar extends React.Component {
     return (
       <Navbar bg="dark" variant="dark">
         <Navbar.Text>ReclamApp!</Navbar.Text>
-        <Nav.Link href="/login">Mis edificios</Nav.Link>
-        <Nav.Link href="/home">Mis Reclamos</Nav.Link>
-        <Nav.Link href="/home">Agregar Reclamo</Nav.Link>
+        <Nav.Link href="/MisEdificios">Mis edificios</Nav.Link>
+        <Nav.Link href="/MisReclamos">Mis Reclamos</Nav.Link>
+        <Nav.Link href="/AgregarReclamo">Agregar Reclamo</Nav.Link>
       </Navbar>
     );
   }
