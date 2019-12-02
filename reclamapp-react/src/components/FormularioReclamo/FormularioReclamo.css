@@ -1,0 +1,88 @@
+.subir {
+  position: absolute;
+  width: 208px;
+  height: 56px;
+  left: 1261px;
+  top: 700px;
+}
+.seleccione1 {
+  position: absolute;
+  width: 614px;
+  height: 55px;
+  left: 80px;
+  top: 700px;
+
+  font-family: Arbutus Slab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 30px;
+  color: white;
+}
+.seleccione2 {
+  position: absolute;
+  width: 614px;
+  height: 55px;
+  left: 80px;
+  top: 600px;
+
+  font-family: Arbutus Slab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 30px;
+  color: white;
+}
+.descripcion1 {
+  position: absolute;
+  left: 50px;
+  top: 300px;
+}
+.label1 {
+  left: 50px;
+  top: 250px;
+
+  font-family: Arbutus Slab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 30px;
+
+  color: #ffffff;
+}
+.label2 {
+  left: 50px;
+  top: 250px;
+
+  font-family: Arbutus Slab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 30px;
+
+  color: #ffffff;
+}
+.drop {
+  left: 50px;
+}
+.drop1 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 50px;
+  top: 5px;
+}
+.drop2 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 50px;
+  top: 30px;
+}
+.Salir {
+  position: absolute;
+  width: 208px;
+  height: 56px;
+  left: 1520px;
+  top: 700px;
+}

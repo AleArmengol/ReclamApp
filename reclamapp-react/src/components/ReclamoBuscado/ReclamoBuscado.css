@@ -1,0 +1,15 @@
+.resultado{
+    position: absolute;
+width: 814px;
+height: 85px;
+left: 30px;
+top: 100px;
+
+font-family: Arbutus Slab;
+font-style: normal;
+font-weight: normal;
+font-size: 36px;
+line-height: 45px;
+
+color: #FFFFFF;
+}

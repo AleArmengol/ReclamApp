@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form, DropdownButton, FormGroup, Button } from "react-bootstrap";
 import DropdownItem from "react-bootstrap/DropdownItem";
 import Modal from "react-bootstrap/Modal";
+import "../FormularioReclamo/FormularioReclamo.css";
 
 class FormularioReclamo extends Component {
   constructor(props) {
@@ -193,6 +194,8 @@ class FormularioReclamo extends Component {
         <div>
           <h1></h1>
           <DropdownButton
+            className="drop1"
+            variant="outline-light"
             title={this.state.unidadSeleccionada}
             onSelect={this.handleSelectUnidad.bind(this)}
           >
@@ -202,15 +205,18 @@ class FormularioReclamo extends Component {
               </DropdownItem>
             ))}
           </DropdownButton>
+          {/* <label className="label1">Descripcion</label> */}
           <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Descripcion</Form.Label>
+            {/* <Form.Label>Descripcion</Form.Label> */}
             <Form.Control
+              style={{ width: "810px", height: "354px" }}
+              className="descripcion1"
               as="textarea"
               rows="3"
               placeholder="Describa su reclamo..."
             />
           </Form.Group>
-          <FormGroup>
+          <FormGroup className="seleccione1">
             Seleccione una imagen para adjuntar a su Reclamo
             <input type="file" name="imagen"></input>
           </FormGroup>
@@ -219,17 +225,21 @@ class FormularioReclamo extends Component {
     } else {
       mostrar = (
         <div>
+          {/* <label className="label2">Descripcion</label> */}
           <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Descripcion</Form.Label>
+            {/* <Form.Label className="label2">Descripcion</Form.Label> */}
             <Form.Control
+              style={{ width: "810px", height: "354px" }}
+              className="descripcion2"
               as="textarea"
+              placeholder="Describa su reclamo..."
               rows="3"
               inputRef={ref => {
                 this.descripcion = ref;
               }}
             />
           </Form.Group>
-          <FormGroup>
+          <FormGroup className="seleccione2">
             Seleccione una imagen para adjuntar a su Reclamo
             <input type="file" name="imagen"></input>
           </FormGroup>
@@ -242,6 +252,8 @@ class FormularioReclamo extends Component {
         <Form>
           <h1></h1>
           <DropdownButton
+            className="drop"
+            variant="outline-light"
             title={this.state.dondeOcurrio}
             onSelect={this.handleSelectDonde}
           >
@@ -257,6 +269,8 @@ class FormularioReclamo extends Component {
           {this.state.seleccionoLugar ? (
             <div>
               <DropdownButton
+                className="drop2"
+                variant="outline-light"
                 title={this.state.edificioSeleccionado}
                 onSelect={this.handleSelectEdificio.bind(this)}
               >
@@ -268,8 +282,19 @@ class FormularioReclamo extends Component {
               </DropdownButton>
               {mostrar}
               <div>
-                <Button onClick={this.agregarReclamo.bind(this)}>
+                <Button
+                  variant="outline-light"
+                  className="subir"
+                  onClick={this.agregarReclamo.bind(this)}
+                >
                   Subir Reclamo
+                </Button>
+                <Button
+                  variant="outline-light"
+                  className="Salir"
+                  href="/Principal"
+                >
+                  Salir
                 </Button>
               </div>
             </div>

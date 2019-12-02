@@ -1,89 +1,88 @@
-.Label-Registro{
-    position: absolute;
-    width: 668px;
-    height: 129px;
-    left: 1151px;
-    top: 272px;
-    
-    font-family: Arbutus Slab;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 72px;
-    line-height: 90px;
+.Label-Registro {
+  position: absolute;
+  width: 668px;
+  height: 129px;
+  left: 1151px;
+  top: 272px;
 
-    color: #FFFFFF;
+  font-family: Arbutus Slab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 72px;
+  line-height: 90px;
 
+  color: #ffffff;
 }
 
-.Label-Registro2{
-    position: absolute;
-    width: 671px;
-    height: 72px;
-    left: 1173px;
-    top: 366px;
-    
-    font-family: Arbutus Slab;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 36px;
-    line-height: 45px;
-    
-    color: #FFFFFF;
+.Label-Registro2 {
+  position: absolute;
+  width: 671px;
+  height: 72px;
+  left: 1173px;
+  top: 366px;
+
+  font-family: Arbutus Slab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 45px;
+
+  color: #ffffff;
 }
 
-.usuarioR{
-    position: absolute;
-    width: 242px;
-    height: 61px;
-    left: 1162px;
-    top: 485px;
-    
-    background: #FFFFFF;
-    border-radius: 10px;
+.usuarioR {
+  position: absolute;
+  width: 242px;
+  height: 61px;
+  left: 1162px;
+  top: 485px;
+
+  background: #ffffff;
+  border-radius: 10px;
 }
 
-.dni{
-    position: absolute;
-    width: 245px;
-    height: 61px;
-    left: 1495px;
-    top: 485px;
-    
-    background: #FFFFFF;
-    border-radius: 10px;
+.dni {
+  position: absolute;
+  width: 245px;
+  height: 61px;
+  left: 1495px;
+  top: 485px;
+
+  background: #ffffff;
+  border-radius: 10px;
 }
 
-.ContraseñaR{
-    position: absolute;
-    width: 242px;
-    height: 59px;
-    left: 1162px;
-    top: 616px;
-    
-    background: #FFFFFF;
-    border-radius: 10px;
+.ContraseñaR {
+  position: absolute;
+  width: 242px;
+  height: 59px;
+  left: 1162px;
+  top: 616px;
+
+  background: #ffffff;
+  border-radius: 10px;
 }
 
-.repetirContraseña{
-    position: absolute;
-    width: 245px;
-    height: 59px;
-    left: 1495px;
-    top: 616px;
-    
-    background: #FFFFFF;
-    border-radius: 10px;
+.repetirContraseña {
+  position: absolute;
+  width: 245px;
+  height: 59px;
+  left: 1495px;
+  top: 616px;
+
+  background: #ffffff;
+  border-radius: 10px;
 }
 
-.btn-registro{
-    position: absolute;
-    width: 376px;
-    height: 80px;
-    left: 1268px;
-    top: 733px;
+.btn-registro {
+  position: absolute;
+  width: 376px;
+  height: 80px;
+  left: 1268px;
+  top: 733px;
 
-    font-family: Arya;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 40px;
+  font-family: Arya;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
 }

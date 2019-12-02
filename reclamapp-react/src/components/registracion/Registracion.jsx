@@ -104,6 +104,7 @@ export default class Registracion extends React.Component {
                       .then(res => {
                         if (res === "Success") {
                           console.log("El Usuario se registro correctamente");
+                          window.open("/", "_top");
                         }
                       });
                   }

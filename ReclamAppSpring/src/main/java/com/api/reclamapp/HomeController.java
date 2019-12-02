@@ -272,10 +272,10 @@ public class HomeController {
 
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/reclamosPorEdificio", method = RequestMethod.GET, produces = { "application/json" })
-	public @ResponseBody <json> String reclamosPorEdificio(@RequestParam(value = "codigo", required = true) int codigo)
+	public @ResponseBody <json> String reclamosPorEdificio(@RequestParam(value = "nombre", required = true) String nombre)
 			throws JsonProcessingException, EdificioException {
 		try {
-			List<ReclamoView> reclamos = Controlador.getInstancia().reclamosPorEdificio(codigo);
+			List<ReclamoView> reclamos = Controlador.getInstancia().reclamosPorEdificio(nombre);
 			ObjectMapper mapper = new ObjectMapper();
 			return mapper.writeValueAsString(reclamos);
 		} catch (EdificioException e) {
@@ -310,7 +310,7 @@ public class HomeController {
 			return mapper.writeValueAsString(reclamo);
 		} catch (ReclamoException e) {
 			// TODO Auto-generated catch block
-			return e.getMessage();
+			return "Error";
 		}
 	}
 
@@ -335,6 +335,14 @@ public class HomeController {
 		Set<String> nombreEdificios = Controlador.getInstancia().edificiosByPersona(documento);
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writeValueAsString(nombreEdificios);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/getAllReclamos", method = RequestMethod.GET, produces = {"application/json"})
+	public @ResponseBody<json> String  getAllReclamos()throws JsonProcessingException {
+		List<ReclamoView> reclamos = Controlador.getInstancia().getAllReclamos();
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(reclamos);
 	}
 
 	@CrossOrigin(origins = "http://localhost:3000")

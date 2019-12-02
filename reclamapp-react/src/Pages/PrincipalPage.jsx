@@ -1,13 +1,11 @@
-import React from 'react';
-import LogIn from '../components/logIn/LogIn';
-import Registracion from '../components/registracion/Registracion';
+import React from "react";
+import NavBar from "../components/Navbar/Navbar";
 
 function PrincipalPage() {
   return (
     <div>
-      <LogIn/>
-      <Registracion/>
-    </div>   
+      <NavBar />
+    </div>
   );
 }
 

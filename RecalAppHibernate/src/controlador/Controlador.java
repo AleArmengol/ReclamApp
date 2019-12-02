@@ -167,12 +167,22 @@ public class Controlador {
 		persona.delete();
 	}
 
-	public List<ReclamoView> reclamosPorEdificio(int codigo) throws EdificioException {
+	public List<ReclamoView> reclamosPorEdificio(String nombre) throws EdificioException {
 		List<ReclamoView> reclamosV = new ArrayList<ReclamoView>();
 		List<Reclamo> reclamosN = new ArrayList<Reclamo>();
+		int codigo = getCodigoEdificioByNombre(nombre);
 		buscarEdificio(codigo); // esta para chequear que exista, de lo contrario
 		reclamosN = ReclamoDAO.getInstance().getReclamosByEdificio(codigo);
 		for (Reclamo rn : reclamosN) {
+			reclamosV.add(rn.toView());
+		}
+		return reclamosV;
+	}
+	
+	public List<ReclamoView> getAllReclamos(){
+		List<ReclamoView> reclamosV = new ArrayList<ReclamoView>();
+		List<Reclamo> reclamosN = ReclamoDAO.getInstance().getAllReclamos();
+		for(Reclamo rn : reclamosN) {
 			reclamosV.add(rn.toView());
 		}
 		return reclamosV;

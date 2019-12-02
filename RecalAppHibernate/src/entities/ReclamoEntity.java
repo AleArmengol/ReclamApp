@@ -125,25 +125,27 @@ public class ReclamoEntity {
 
 	public Estado stringToEstado(String estado) {
 		Estado aux = null;
-		if (estado == "abierto") {
+		if (estado.equals("abierto")) {
 			aux = Estado.abierto;
-			return aux;
-		} else if (estado == "anulado") {
+			
+		} else if (estado.equals("anulado")) {
 			aux = Estado.anulado;
-			return aux;
-		} else if (estado == "desestimado") {
+			
+		} else if (estado.equals("desestimado")) {
 			aux = Estado.desestimado;
-			return aux;
-		} else if (estado == "en proceso") {
+			
+		} else if (estado.equals("en proceso")) {
 			aux = Estado.enProceso;
-			return aux;
-		} else if (estado == "nuevo") {
+			
+		} else if (estado.equals("nuevo")) {
 			aux = Estado.nuevo;
-			return aux;
+			
 		} else {
 			aux = Estado.terminado;
-			return aux;
+			
 		}
+		System.out.println("RECLAMOENTITY ESTADO LINEA 147: " + aux);
+		return aux;
 	}
 
 }

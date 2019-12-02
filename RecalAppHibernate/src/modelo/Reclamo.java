@@ -170,7 +170,10 @@ public class Reclamo {
 	public ReclamoView toView() {
 		PersonaView auxPersona = usuario.toView();
 		EdificioView auxEdificio = edificio.toView();
-		UnidadView auxUnidad = unidad.toView();
+		UnidadView auxUnidad = null;
+		if(unidad!= null) {
+			auxUnidad = unidad.toView();
+		}
 		List<Imagen> imagenes = this.getImagenes();
 		List<String> pathImagenes = new ArrayList<String>();
 		for (Imagen im : imagenes) {

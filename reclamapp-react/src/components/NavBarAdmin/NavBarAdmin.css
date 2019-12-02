@@ -1,9 +1,24 @@
-.nav{
-    position: absolute;
-    width: 1920px;
-    height: 113px;
-    left: 0px;
-    top: 0px;
+.nav {
+  position: absolute;
+  width: 1920px;
+  height: 113px;
+  left: 0px;
+  top: 0px;
 
-    background-color: #53596F;
+  background-color: #53596f;
+}
+.bienvenida {
+  position: absolute;
+  width: 491px;
+  height: 55px;
+  left: 1296px;
+  top: 50px;
+
+  font-family: Arbutus Slab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 45px;
+
+  color: #ffffff;
 }

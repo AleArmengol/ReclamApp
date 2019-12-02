@@ -59,8 +59,13 @@ export default class LogIn extends React.Component {
             console.log("El usuario y/o la contraseña no son las correctas");
           } else {
             var documento = res.documento;
-            sessionStorage.setItem("documento", documento);
-            window.open("/agregarReclamo", "_top");
+            if (documento === "admin") {
+              sessionStorage.setItem("documento", documento);
+              window.open("/ReclamosAdmin", "_top");
+            } else {
+              sessionStorage.setItem("documento", documento);
+              window.open("/Principal", "_top");
+            }
           }
         });
     }

@@ -50,7 +50,11 @@ public class ReclamoDAO {
 	private Reclamo toNegocio(ReclamoEntity re) {
 		Persona personaN = PersonaDAO.getInstance().toNegocio(re.getUsuarioE());
 		Edificio edificioN = EdificioDAO.getInstance().toNegocio(re.getEdificioE());
-		Unidad unidadN = UnidadDAO.getInstance().toNegocio(re.getUnidadE());
+		Unidad unidadN = null;
+		if(re.getUnidadE() != null) {
+			unidadN = UnidadDAO.getInstance().toNegocio(re.getUnidadE());
+		}
+		System.out.println("ESTADO DENTRO DE RECLAMO DAO LINEA 57 " + re.getEstado());
 		return new Reclamo(re.getIdReclamo(), personaN, edificioN, re.getUbicacion(), re.getDescripcion(), unidadN,
 				re.stringToEstado(re.getEstado()));
 	}
@@ -136,6 +140,18 @@ public class ReclamoDAO {
 				.setString(0, documento).setInteger(1, codigo).setString(2, ubicación).setString(3, descripcion)
 				.setInteger(4, id); // error cannot be cast to entities.ReclamoEntity BUG
 		return reclamoE.getIdReclamo();
+	}
+
+	public List<Reclamo> getAllReclamos() {
+		List<Reclamo> reclamosN = new ArrayList<Reclamo>();
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction().commit();
+		List<ReclamoEntity> reclamosE = s.createQuery("from ReclamoEntity").list();
+		s.close();
+		for (ReclamoEntity re : reclamosE) {
+			reclamosN.add(toNegocio(re));
+		}
+		return reclamosN;
 	}
 
 }
